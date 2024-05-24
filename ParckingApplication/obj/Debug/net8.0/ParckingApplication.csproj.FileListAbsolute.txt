@@ -1,0 +1,14 @@
+/Users/bogdan/ParkingAplication/ParckingApplication/bin/Debug/net8.0/ParckingApplication
+/Users/bogdan/ParkingAplication/ParckingApplication/bin/Debug/net8.0/ParckingApplication.deps.json
+/Users/bogdan/ParkingAplication/ParckingApplication/bin/Debug/net8.0/ParckingApplication.runtimeconfig.json
+/Users/bogdan/ParkingAplication/ParckingApplication/bin/Debug/net8.0/ParckingApplication.dll
+/Users/bogdan/ParkingAplication/ParckingApplication/bin/Debug/net8.0/ParckingApplication.pdb
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.GeneratedMSBuildEditorConfig.editorconfig
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.AssemblyInfoInputs.cache
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.AssemblyInfo.cs
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.csproj.CoreCompileInputs.cache
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.dll
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/refint/ParckingApplication.dll
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.pdb
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.genruntimeconfig.cache
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ref/ParckingApplication.dll

@@ -8,25 +8,40 @@ public class UnitTest1
     public void Test1()
     {
         // // Arrange
-        // var result = 3;
-        Program.Result = 3;
+        //var result = 3;
+        var expectedResult = 3;
+        Parking parcking = new Parking();
 
         // Act
-        Program.AddFunction(new ParckedCar("Vasile", "abc"));
+        parcking.AddFunction("Vasile", "abc");
         // Assert
-        Assert.Equal(Program.Result, Program.ListOfParckedCar.Count);
+        Assert.Equal(expectedResult, parcking.ListOfParckedCar.Count);
     }
 
     [Fact]
     public void Test2()
     {
         // // Arrange
-        // var result = 3;
-        Program.Result = 6;
-
+        //var result = 3;
+         Parking parcking = new Parking();
+         parcking.MaxSlots = 2;
+         var listCount = parcking.ListOfParckedCar.Count;
         // Act
-        Program.AddFunction(new ParckedCar("Tudor", "abc"));
+        parcking.AddFunction("Tudor", "abc");
         // Assert
-        Assert.True(Program.Result > Program.ListOfParckedCar.Count);
+        Assert.Equal(listCount , parcking.ListOfParckedCar.Count);
+    }
+
+    [Fact]
+    public void Test3()
+    {
+        // // Arrange
+        //var result = 3;
+        Parking parcking = new Parking();
+        var listCount = parcking.ListOfParckedCar.Count;
+        // Act
+        parcking.AddFunction("Tudor");
+        // Assert
+        Assert.Equal(listCount , parcking.ListOfParckedCar.Count);
     }
 }

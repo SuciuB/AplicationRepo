@@ -12,3 +12,4 @@
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.pdb
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.genruntimeconfig.cache
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ref/ParckingApplication.dll
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.sourcelink.json

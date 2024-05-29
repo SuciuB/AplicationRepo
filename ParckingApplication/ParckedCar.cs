@@ -3,9 +3,9 @@ namespace ParckingApplication;
 
 public class ParckedCar
 {
-    public ParckedCar(string userName, string carNumber, DateTime inTime)
+    public ParckedCar(string userName, string carNumber)
     {
-        InTime = inTime;
+        InTime = DateTime.Now;
         UserName = userName;
         CarNumber = carNumber;
         ExitTime = null; 

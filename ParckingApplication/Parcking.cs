@@ -10,14 +10,14 @@ public class Parking
     public int MaxSlots = 4;
     
 
-    public List<ParckedCar> ListOfParckedCar = new List<ParckedCar> { new ParckedCar("Bogdan", "abc"), new ParckedCar("Andrei", "abcd")};
+    public List<ParckedCar> ListOfParckedCar = new List<ParckedCar> { new ParckedCar("Bogdan", DateTime.Now, "abc"), new ParckedCar("Andrei", DateTime.Now,  "abcdf")};
     
 
-    public void AddFunction(string userName,string? carNumber = null)
+    public void AddFunction(string userName, DateTime inTime,string? carNumber = null)
     {
         if(ListOfParckedCar.Count < MaxSlots && carNumber != null)
         {
-            var Car = new ParckedCar(userName, carNumber);
+            var Car = new ParckedCar(userName, inTime, carNumber);
             ListOfParckedCar.Add(Car);
         }
     }
@@ -30,21 +30,21 @@ public class Parking
         }
     }
         
-    public void CalculateAmount(string carNumber)
+    public double CalculateAmount(string carNumber)
     {
         var parkedCar = ListOfParckedCar.Find(car => car.CarNumber == carNumber);
             if (parkedCar != null)
             {
-                TimeSpan duration = parkedCar.ExitTime.Value - parkedCar.InTime;
+                TimeSpan duration = DateTime.Now - parkedCar.InTime;
                 double amount = CalculateParkingFee(duration);
-                Console.WriteLine($"Car {parkedCar.CarNumber} parked by {parkedCar.UserName} owes {amount:C}.");
+                return amount;
             }
             else
             {
-                Console.WriteLine($"Car is not found.");
+                return 0;
             }
     }
-    private double CalculateParkingFee(TimeSpan duration)
+    public double CalculateParkingFee(TimeSpan duration)
     {
         const double ratePerHour = 5.0; // Assuming $5 per hour rate
         return Math.Floor(duration.TotalHours) * ratePerHour;

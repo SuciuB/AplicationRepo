@@ -1,3 +1,6 @@
+using System.Globalization;
+using System.Runtime.Serialization;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System;
 using ParckingApplication;
@@ -15,7 +18,7 @@ public class UnitTest1
         Parking parcking = new Parking();
 
         // Act
-        parcking.AddFunction("Vasile", "abc", DateTime.now);
+        parcking.AddFunction("Vasile",DateTime.Now, "abc");
         // Assert
         Assert.Equal(expectedResult, parcking.ListOfParckedCar.Count);
     }
@@ -29,7 +32,7 @@ public class UnitTest1
          parcking.MaxSlots = 2;
          var listCount = parcking.ListOfParckedCar.Count;
         // Act
-        parcking.AddFunction("Tudor", "abc", DateTime.now);
+        parcking.AddFunction("Tudor",DateTime.Now, "abc");
         // Assert
         Assert.Equal(listCount , parcking.ListOfParckedCar.Count);
     }
@@ -42,19 +45,19 @@ public class UnitTest1
         Parking parcking = new Parking();
         var listCount = parcking.ListOfParckedCar.Count;
         // Act
-        parcking.AddFunction("Tudor");
+        parcking.AddFunction("Tudor", DateTime.Now);
         // Assert
         Assert.Equal(listCount , parcking.ListOfParckedCar.Count);
     }
+    [Fact]
     public void Test4()
     {
         // // Arrange
-        //var result = 3;
+        var result = 15;
         Parking parcking = new Parking();
-        var dateNow = parcking.ListOfParckedCar.inTime;
         // Act
-        parcking.AddFunction("Tudor");
+        parcking.AddFunction("Ionel", DateTime.Now.AddHours(-3), "ab");
         // Assert
-        Assert.Equal(listCount , parcking.ListOfParckedCar.Count);
+        Assert.Equal(result ,parcking.CalculateAmount("ab"));
     }
 }

@@ -1,3 +1,6 @@
+using System.Xml;
+using System.Data.SqlTypes;
+using System.Data;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.ComponentModel;
@@ -18,9 +21,9 @@ public class UnitTest1
         Parking parcking = new Parking();
 
         // Act
-        parcking.AddFunction("Vasile",DateTime.Now, "abc");
+        parcking.AddFunction("Vasile", "abc");
         // Assert
-        Assert.Equal(expectedResult, parcking.ListOfParckedCar.Count);
+        Assert.Equal(expectedResult, parcking.ListOfParkedCar.Count);
     }
 
     [Fact]
@@ -30,11 +33,11 @@ public class UnitTest1
         //var result = 3;
          Parking parcking = new Parking();
          parcking.MaxSlots = 2;
-         var listCount = parcking.ListOfParckedCar.Count;
+         var listCount = parcking.ListOfParkedCar.Count;
         // Act
-        parcking.AddFunction("Tudor",DateTime.Now, "abc");
+        parcking.AddFunction("Tudor","abc");
         // Assert
-        Assert.Equal(listCount , parcking.ListOfParckedCar.Count);
+        Assert.Equal(listCount , parcking.ListOfParkedCar.Count);
     }
 
     [Fact]
@@ -43,21 +46,23 @@ public class UnitTest1
         // // Arrange
         //var result = 3;
         Parking parcking = new Parking();
-        var listCount = parcking.ListOfParckedCar.Count;
+        var listCount = parcking.ListOfParkedCar.Count;
         // Act
-        parcking.AddFunction("Tudor", DateTime.Now);
+        parcking.AddFunction("Tudor");
         // Assert
-        Assert.Equal(listCount , parcking.ListOfParckedCar.Count);
+        Assert.Equal(listCount , parcking.ListOfParkedCar.Count);
     }
     [Fact]
     public void Test4()
     {
         // // Arrange
-        var result = 15;
-        Parking parcking = new Parking();
+        var expectedResul = 15;
+        Parking parking = new Parking();
+        ParkedCar parkedCar = new ParkedCar("Tudor", "def", DateTime.Now.AddHours(-3));
+        parking.ListOfParkedCar.Add(parkedCar);
         // Act
-        parcking.AddFunction("Ionel", DateTime.Now.AddHours(-3), "ab");
+        var result = parking.CalculateAmount("def");
         // Assert
-        Assert.Equal(result ,parcking.CalculateAmount("ab"));
+        Assert.Equal(expectedResul ,result);
     }
 }

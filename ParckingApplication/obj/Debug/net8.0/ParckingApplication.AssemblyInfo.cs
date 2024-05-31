@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ParckingApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+379dff5a879de51a2d881eb54e6e1f559dc14eb9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d140d630488b819e1641d8d0052ab6a2c70b8e2f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ParckingApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ParckingApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

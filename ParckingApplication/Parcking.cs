@@ -10,39 +10,39 @@ public class Parking
     public int MaxSlots = 4;
     
 
-    public List<ParckedCar> ListOfParckedCar = new List<ParckedCar> { new ParckedCar("Bogdan", DateTime.Now, "abc"), new ParckedCar("Andrei", DateTime.Now,  "abcdf")};
+    public List<ParkedCar> ListOfParkedCar = new List<ParkedCar> { new ParkedCar("Bogdan",  "abc" ), new ParkedCar("Andrei",  "abcde")};
     
 
-    public void AddFunction(string userName, DateTime inTime,string? carNumber = null)
+    public void AddFunction(string userName,string? carNumber = null)
     {
-        if(ListOfParckedCar.Count < MaxSlots && carNumber != null)
+        if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
         {
-            var Car = new ParckedCar(userName, inTime, carNumber);
-            ListOfParckedCar.Add(Car);
+                var Car = new ParkedCar(userName, carNumber);
+                ListOfParkedCar.Add(Car);
         }
     }
-    public void ExitFunction(string carNumber, DateTime exitTime)
+    public void ExitFunction(string carNumber)
     {
-        var parkedCar = ListOfParckedCar.Find(car => car.CarNumber == carNumber);
+        var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
         if (parkedCar != null)
         {
-            parkedCar.ExitTime = exitTime;
+            parkedCar.ExitTime = DateTime.Now;
         }
     }
         
     public double CalculateAmount(string carNumber)
     {
-        var parkedCar = ListOfParckedCar.Find(car => car.CarNumber == carNumber);
-            if (parkedCar != null)
-            {
-                TimeSpan duration = DateTime.Now - parkedCar.InTime;
-                double amount = CalculateParkingFee(duration);
-                return amount;
-            }
-            else
-            {
-                return 0;
-            }
+        var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
+        if (parkedCar != null)
+        {
+            TimeSpan duration = DateTime.Now - parkedCar.InTime;
+            double amount = CalculateParkingFee(duration);
+            return amount;
+        }
+        else
+        {
+            return 0;
+        }
     }
     public double CalculateParkingFee(TimeSpan duration)
     {

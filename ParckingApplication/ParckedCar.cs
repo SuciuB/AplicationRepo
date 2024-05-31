@@ -1,14 +1,21 @@
 
 namespace ParckingApplication;
 
-public class ParckedCar
+public class ParkedCar
 {
-    public ParckedCar(string userName, DateTime inTime, string carNumber)
+    public ParkedCar(string userName, string carNumber, DateTime inTime)
     {
         InTime = inTime;
         UserName = userName;
         CarNumber = carNumber;
         ExitTime = null; 
+    }
+    public ParkedCar(string userName, string carNumber)
+    {
+        UserName = userName;
+        CarNumber = carNumber;
+        ExitTime = null; 
+        InTime = DateTime.Now;
     }
     public string UserName { get; set; }
     public string CarNumber { get; set; }

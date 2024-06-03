@@ -7,9 +7,9 @@
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.AssemblyInfoInputs.cache
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.AssemblyInfo.cs
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.csproj.CoreCompileInputs.cache
+/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.sourcelink.json
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.dll
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/refint/ParckingApplication.dll
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.pdb
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.genruntimeconfig.cache
 /Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ref/ParckingApplication.dll
-/Users/bogdan/ParkingAplication/ParckingApplication/obj/Debug/net8.0/ParckingApplication.sourcelink.json

@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System;
+using Xunit;
 using ParckingApplication;
 
 namespace ParckingApplication.Tests;
@@ -52,6 +53,7 @@ public class UnitTest1
         // Assert
         Assert.Equal(listCount , parcking.ListOfParkedCar.Count);
     }
+
     [Fact]
     public void Test4()
     {
@@ -65,6 +67,7 @@ public class UnitTest1
         // Assert
         Assert.Equal(expectedResul ,result);
     }
+
     [Fact]
     public void Test5()
     {
@@ -74,8 +77,37 @@ public class UnitTest1
         ParkedCar parkedCar = new ParkedCar("Tudor", "def", DateTime.Now);
         parking.ListOfParkedCar.Add(parkedCar);
         // Act
+        var result = parking.CalculateAmount("de");
+        // Assert
+        Assert.Equal(expectedResul ,result);
+    }
+
+    [Fact]
+    public void Test6()
+    {
+        // // Arrange
+        var expectedResul = 0;
+        Parking parking = new Parking();
+        ParkedCar parkedCar = new ParkedCar("Tudor", "def", DateTime.Now.AddMinutes(-5));
+        parking.ListOfParkedCar.Add(parkedCar);
+        // Act
         var result = parking.CalculateAmount("def");
         // Assert
         Assert.Equal(expectedResul ,result);
     }
+
+    [Fact]
+    public void Test7()
+    {
+        // // Arrange
+        var expectedResul = 5;
+        Parking parking = new Parking();
+        ParkedCar parkedCar = new ParkedCar("Tudor", "def", DateTime.Now.AddHours(-1).AddMinutes(-5));
+        parking.ListOfParkedCar.Add(parkedCar);
+        // Act
+        var result = parking.CalculateAmount("def");
+        // Assert
+        Assert.Equal(expectedResul ,result);
+    }
+    
 }

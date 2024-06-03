@@ -38,6 +38,7 @@ public class Parking
             TimeSpan duration = DateTime.Now - parkedCar.InTime;
             double amount = CalculateParkingFee(duration);
             return amount;
+            
         }
         else
         {
@@ -47,6 +48,14 @@ public class Parking
     public double CalculateParkingFee(TimeSpan duration)
     {
         const double ratePerHour = 5.0; // Assuming $5 per hour rate
-        return Math.Floor(duration.TotalHours) * ratePerHour;
+        var totalHours = Math.Ceiling(duration.TotalHours);
+
+        if(totalHours <= 1)
+        {
+            return 0;
+        }
+        var payableHours = totalHours -1;
+        var calculatePayment =  payableHours * ratePerHour;
+        return calculatePayment;
     }
 }

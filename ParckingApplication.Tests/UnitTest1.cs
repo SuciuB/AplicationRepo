@@ -65,4 +65,17 @@ public class UnitTest1
         // Assert
         Assert.Equal(expectedResul ,result);
     }
+    [Fact]
+    public void Test5()
+    {
+        // // Arrange
+        var expectedResul = 0;
+        Parking parking = new Parking();
+        ParkedCar parkedCar = new ParkedCar("Tudor", "def", DateTime.Now);
+        parking.ListOfParkedCar.Add(parkedCar);
+        // Act
+        var result = parking.CalculateAmount("def");
+        // Assert
+        Assert.Equal(expectedResul ,result);
+    }
 }

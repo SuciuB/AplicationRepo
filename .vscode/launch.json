@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/ParckingApplication.Tests/bin/Debug/net8.0/ParckingApplication.Tests.dll",
+            "program": "${workspaceFolder}/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.Tests.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ParckingApplication.Tests",
+            "cwd": "${workspaceFolder}/ParkingApplication.Tests",
             "stopAtEntry": false,
             "console": "internalConsole",
             "justMyCode": true

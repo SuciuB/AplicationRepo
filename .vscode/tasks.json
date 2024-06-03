@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/ParckingApplication.Tests"
+                "${workspaceFolder}/ParkingApplication.Tests"
             ],
             "problemMatcher": "$msCompile"
         }

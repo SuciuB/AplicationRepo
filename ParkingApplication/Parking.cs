@@ -10,14 +10,15 @@ public class Parking
     public int MaxSlots = 4;
     
 
-    public List<ParkedCar> ListOfParkedCar = new List<ParkedCar> { new ParkedCar("Bogdan",  "abc" ), new ParkedCar("Andrei",  "abcde")};
+    public List<ParkedCar> ListOfParkedCar = new List<ParkedCar> { new ParkedCar(1, "Bogdan",  "abc"), new ParkedCar(2, "Andrei",  "abcde")};
+    public List<Account> ListOfAccounts = new List<Account> {new Account(1, 500), new Account(2, 200)};
     
 
-    public void AddToParking(string userName,string? carNumber = null)
+    public void AddToParking(int id, string userName,string? carNumber = null)
     {
         if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
         {
-                var Car = new ParkedCar(userName, carNumber);
+                var Car = new ParkedCar(id, userName, carNumber);
                 ListOfParkedCar.Add(Car);
         }
     }
@@ -57,5 +58,26 @@ public class Parking
         var payableHours = totalHours -1;
         var calculatePayment =  payableHours * ratePerHour;
         return calculatePayment;
+        
     }
+
+    public void PayForParking(string carNumber)
+    {
+        var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
+        
+        double amountToPay = CalculateAmount(carNumber);
+
+        var account = ListOfAccounts.Find(acc => acc.Id == parkedCar.Id);
+
+        if (account.Money >= amountToPay)
+
+        {
+            account.Money -= amountToPay;
+        }
+        
+
+    }
+
 }
+
+    

@@ -1,0 +1,9 @@
+ParkingApplication.Tests.UnitTest1.CarParked
+ParkingApplication.Tests.UnitTest1.SlotsAvailable
+ParkingApplication.Tests.UnitTest1.CountingObjects
+ParkingApplication.Tests.UnitTest1.AmountToPay
+ParkingApplication.Tests.UnitTest1.NothingToPay
+ParkingApplication.Tests.UnitTest1.FirstHour
+ParkingApplication.Tests.UnitTest1.SecondOurPay
+ParkingApplication.Tests.UnitTest1.RemoveAmount
+ParkingApplication.Tests.UnitTest1.NotEnoughAmount

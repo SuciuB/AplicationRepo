@@ -3,15 +3,17 @@ namespace ParkingApplication;
 
 public class ParkedCar
 {
-    public ParkedCar(string userName, string carNumber, DateTime inTime)
+    public ParkedCar(int id, string userName, string carNumber, DateTime inTime)
     {
+        Id = id;
         InTime = inTime;
         UserName = userName;
         CarNumber = carNumber;
         ExitTime = null; 
     }
-    public ParkedCar(string userName, string carNumber)
+    public ParkedCar(int id,string userName, string carNumber)
     {
+        Id = id;
         UserName = userName;
         CarNumber = carNumber;
         ExitTime = null; 
@@ -21,4 +23,5 @@ public class ParkedCar
     public string CarNumber { get; set; }
     public DateTime InTime { get; set; }
     public DateTime? ExitTime { get; set; }
+    public int Id { get; set; }
 }

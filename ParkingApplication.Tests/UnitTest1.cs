@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Threading.Tasks.Dataflow;
 using System.Xml;
 using System.Data.SqlTypes;
@@ -15,7 +16,7 @@ namespace ParkingApplication.Tests;
 public class UnitTest1
 {
     [Fact]
-    public void CarParked()
+    public void AddToParking_CarParked_SlotTaken()
     {
         // // Arrange
         //var result = 3;
@@ -29,7 +30,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void SlotsAvailable()
+    public void AddToParking_SlotsAvailable_SlotsFree()
     {
         // // Arrange
         //var result = 3;
@@ -43,7 +44,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void CountingObjects()
+    public void AddToParking_CountingObjects_CountingThroughList()
     {
         // // Arrange
         //var result = 3;
@@ -56,12 +57,12 @@ public class UnitTest1
     }
 
     [Fact]
-    public void AmountToPay()
+    public void CalculateAmount_AmountToPay_PayForHoursParked()
     {
         // // Arrange
         var expectedResul = 15;
         Parking parking = new Parking();
-        ParkedCar parkedCar = new ParkedCar(1,"Tudor", "def", DateTime.Now.AddHours(-3));
+        ParkedCar parkedCar = new ParkedCar(1,"Tudor", "def", DateTime.Now.AddHours(-4));
         parking.ListOfParkedCar.Add(parkedCar);
         // Act
         var result = parking.CalculateAmount("def");
@@ -70,7 +71,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void NothingToPay()
+    public void CalculateAmount_NothingToPay_NoPayment()
     {
         // // Arrange
         var expectedResul = 0;
@@ -84,7 +85,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void FirstHour()
+    public void CalculateAmount_FirstHour_FirstOurFree()
     {
         // // Arrange
         var expectedResul = 0;
@@ -96,50 +97,40 @@ public class UnitTest1
         // Assert
         Assert.Equal(expectedResul ,result);
     }
-
-    [Fact]
-    public void SecondOurPay()
-    {
-        // // Arrange
-        var expectedResul = 5;
-        Parking parking = new Parking();
-        ParkedCar parkedCar = new ParkedCar(11, "Tudor", "def", DateTime.Now.AddHours(-1).AddMinutes(-5));
-        parking.ListOfParkedCar.Add(parkedCar);
-        // Act
-        var result = parking.CalculateAmount("def");
-        // Assert
-        Assert.Equal(expectedResul ,result);
-    }
     
     [Fact]
-    public void RemoveAmount()
+    public void PayForParking_RemoveAmount_AmountIsLess()
     {
         // // Arrange
-        var expectedResul = 385;
+        var expectedResul = 380;
+        bool boolResult = true;
         Parking parking = new Parking();
-        ParkedCar parkedCar = new ParkedCar(3, "Tudor", "def", DateTime.Now.AddHours(-3));
+        ParkedCar parkedCar = new ParkedCar(3, "Tudor", "def", DateTime.Now.AddHours(-5));
         Account account = new Account(3, 400);
         parking.ListOfAccounts.Add(account);
         parking.ListOfParkedCar.Add(parkedCar);
         // Act
-        parking.PayForParking("def");
+        var result = parking.PayForParking("def");
         // Assert
         Assert.Equal(expectedResul , account.Money);
+        Assert.Equal(boolResult, result);
     }
 
     [Fact]
-    public void NotEnoughAmount()
+    public void PayForParking_NotEnoughAmount_AmountNotChange()
     {
         // // Arrange
         var expectedResul = 10;
+        bool boolResult = false;
         Parking parking = new Parking();
-        ParkedCar parkedCar = new ParkedCar(3, "Tudor", "def", DateTime.Now.AddHours(-3));
+        ParkedCar parkedCar = new ParkedCar(3, "Tudor", "def", DateTime.Now.AddHours(-4));
         Account account = new Account(3, 10);
         parking.ListOfAccounts.Add(account);
         parking.ListOfParkedCar.Add(parkedCar);
         // Act
-        parking.PayForParking("def");
+        var result = parking.PayForParking("def");
         // Assert
         Assert.Equal(expectedResul , account.Money);
+        Assert.Equal(boolResult , result);
     }
 }

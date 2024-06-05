@@ -25,7 +25,7 @@ public class Parking
     public void ExitParking(string carNumber)
     {
         var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
-        if (parkedCar != null)
+        if (parkedCar != null && PayForParking(carNumber) == true)
         {
             parkedCar.ExitTime = DateTime.Now;
         }
@@ -49,19 +49,18 @@ public class Parking
     public double CalculateParkingFee(TimeSpan duration)
     {
         const double ratePerHour = 5.0; // Assuming $5 per hour rate
-        var totalHours = Math.Ceiling(duration.TotalHours);
 
-        if(totalHours <= 1)
+        if(duration.Hours <= 1)
         {
             return 0;
         }
-        var payableHours = totalHours -1;
+        var payableHours = duration.Hours -1;
         var calculatePayment =  payableHours * ratePerHour;
         return calculatePayment;
         
     }
 
-    public void PayForParking(string carNumber)
+    public bool PayForParking(string carNumber)
     {
         var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
         
@@ -73,8 +72,10 @@ public class Parking
 
         {
             account.Money -= amountToPay;
+            return true;
         }
         
+        return false;
 
     }
 

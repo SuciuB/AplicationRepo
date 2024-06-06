@@ -1,7 +1,9 @@
 
+using ParkingApplication.Services;
+
 namespace ParkingApplication;
 
-public class ParkedCar
+public class ParkedCar : IParkedCarService
 {
     public ParkedCar(int id, string userName, string carNumber, DateTime inTime)
     {
@@ -24,4 +26,17 @@ public class ParkedCar
     public DateTime InTime { get; set; }
     public DateTime? ExitTime { get; set; }
     public int Id { get; set; }
+    public int MaxSlots { get; set; }
+
+    public List<ParkedCar> ListOfParkedCar = new List<ParkedCar> { new ParkedCar(1, "Bogdan",  "abc"), new ParkedCar(2, "Andrei",  "abcde")};
+    public List<Account> ListOfAccounts = new List<Account> {new Account(1, 500), new Account(2, 200)};
+
+    public void AddToParking(int id, string userName,string? carNumber = null)
+    {
+        if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
+        {
+                var Car = new ParkedCar(id, userName, carNumber);
+                ListOfParkedCar.Add(Car);
+        }
+    }
 }

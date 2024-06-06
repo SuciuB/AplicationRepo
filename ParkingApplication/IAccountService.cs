@@ -1,19 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ParkingApplication
 {
-    public class Account
+    public interface IAccountService
     {
-        public Account(int id, double money)
-        {
-            Money = money;
-            Id = id;
-        }
-
+        public int MaxSlots { get; set; }
         public double Money { get; set; }
         public int Id { get; set; }
     }

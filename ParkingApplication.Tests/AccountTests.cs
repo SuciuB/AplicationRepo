@@ -20,8 +20,8 @@ namespace ParkingApplication.Tests
         {
 
             var expectedAmount = 15;
-            Account account = new Account(2, 100);
-            ParkedCar parkedCar = new ParkedCar(1,"Tudor", "def", DateTime.Now.AddHours(-4));
+            Account account = new Account(3, 100);
+            ParkedCar parkedCar = new ParkedCar(3,"Tudor", "def", DateTime.Now.AddHours(-4));
             account.ListOfParkedCar.Add(parkedCar);
 
             var result = account.CalculateAmount("def");
@@ -34,8 +34,8 @@ namespace ParkingApplication.Tests
         {
 
             var expectedAmount = 0;
-            Account account = new Account(2, 100);
-            ParkedCar parkedCar = new ParkedCar(8, "Tudor", "def", DateTime.Now);
+            Account account = new Account(3, 100);
+            ParkedCar parkedCar = new ParkedCar(3, "Tudor", "def", DateTime.Now);
             account.ListOfParkedCar.Add(parkedCar);
 
             var result = account.CalculateAmount("def");
@@ -48,8 +48,8 @@ namespace ParkingApplication.Tests
         {
 
             var expectedAmount = 0;
-            Account account = new Account(2, 100);
-            ParkedCar parkedCar = new ParkedCar(10, "Tudor", "def", DateTime.Now.AddMinutes(-5));
+            Account account = new Account(3, 100);
+            ParkedCar parkedCar = new ParkedCar(3, "Tudor", "def", DateTime.Now.AddMinutes(-5));
             account.ListOfParkedCar.Add(parkedCar);
 
             var result = account.CalculateAmount("def");
@@ -64,7 +64,7 @@ namespace ParkingApplication.Tests
         bool boolResult = true;
         Parking parking = new Parking(2);
         Account account = new Account(4, 300);
-        ParkedCar parkedCar = new ParkedCar(3, "Tudor", "def", DateTime.Now.AddHours(-5));
+        ParkedCar parkedCar = new ParkedCar(4, "Tudor", "def", DateTime.Now.AddHours(-5));
         account.ListOfAccounts.Add(account);
         account.ListOfParkedCar.Add(parkedCar);
 

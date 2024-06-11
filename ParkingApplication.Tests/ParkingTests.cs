@@ -20,34 +20,56 @@ public class ParkingTests
     {
 
         var expectedCarSlots = 2;
-        Parking parking = new Parking(3);
+        ParkingService parkingService = new ParkingService(2);
 
-        parking.AddToParking(4,"Vasile", "abc");
+        parkingService.AddToParking(4,"Vasile", "Popescu", "abc");
 
-        Assert.Equal(expectedCarSlots, parking.ListOfParkedCar.Count);
+        Assert.Equal(expectedCarSlots, parkingService.ListOfParkedCar.Count);
     }
 
     [Fact]
     public void AddToParking_SlotsAvailable_SlotsFree()
     {
 
-         Parking parking = new Parking(2);
-         var listCount = parking.ListOfParkedCar.Count;
+        var expectedCarSlots = 3;
+        ParkingService parkingService = new ParkingService(4);
 
-        parking.AddToParking(5, "Tudor","abc");
+        parkingService.AddToParking(5, "Tudor", "Ionescut", "abc");
 
-        Assert.Equal(listCount , parking.ListOfParkedCar.Count);
+        Assert.Equal(expectedCarSlots , parkingService.ListOfParkedCar.Count);
     }
 
     [Fact]
     public void AddToParking_CountingObjects_CountingThroughList()
     {
 
-        Parking parking = new Parking(2);
-        var listCount = parking.ListOfParkedCar.Count;
+        ParkingService parkingService = new ParkingService(2);
+        var listCount = parkingService.ListOfParkedCar.Count;
 
-        parking.AddToParking(6, "Tudor");
+        parkingService.AddToParking(6, "Tudor", "Stoian", "def");
 
-        Assert.Equal(listCount , parking.ListOfParkedCar.Count);
+        Assert.Equal(listCount , parkingService.ListOfParkedCar.Count);
+    }
+
+    [Fact]
+    public void ExitParking_ExitingParking_ExitParkingDate()
+    {
+        var boolResult = true;
+        ParkingService parkingService = new ParkingService(2);
+
+        var result = parkingService.ExitParking("abc");
+
+        Assert.Equal(boolResult , result);
+    }
+    
+    [Fact]
+    public void ExitParking_CkeckingForCarNumber_CarStillParked()
+    {
+        var boolResult = false;
+        ParkingService parkingService = new ParkingService(2);
+
+        var result = parkingService.ExitParking("abcred");
+
+        Assert.Equal(boolResult , result);
     }
 }

@@ -1,5 +1,5 @@
 
-using ParkingApplication.Services;
+using ParkingApplication;
 
 namespace ParkingApplication;
 
@@ -29,14 +29,12 @@ public class ParkedCar : IParkedCarService
     public int MaxSlots { get; set; }
 
     public List<ParkedCar> ListOfParkedCar = new List<ParkedCar> { new ParkedCar(1, "Bogdan",  "abc"), new ParkedCar(2, "Andrei",  "abcde")};
-    public List<Account> ListOfAccounts = new List<Account> {new Account(1, 500), new Account(2, 200)};
-
-    public void AddToParking(int id, string userName,string? carNumber = null)
-    {
-        if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
-        {
-                var Car = new ParkedCar(id, userName, carNumber);
-                ListOfParkedCar.Add(Car);
-        }
-    }
+    // public void AddToParking(int id, string userName,string? carNumber = null)
+    // {
+    //     if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
+    //     {
+    //             var Car = new ParkedCar(id, userName, carNumber);
+    //             ListOfParkedCar.Add(Car);
+    //     }
+    // }
 }

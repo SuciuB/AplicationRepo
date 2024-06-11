@@ -7,8 +7,6 @@ namespace ParkingApplication
 {
     public interface IAccountService
     {
-        public int MaxSlots { get; set; }
-        public double Money { get; set; }
-        public int Id { get; set; }
+        public bool PayForParking(int carId, DateTime inTime);
     }
 }

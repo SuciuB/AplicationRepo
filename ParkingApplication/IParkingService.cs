@@ -9,10 +9,7 @@ namespace ParkingApplication
     {
         public int MaxSlots { get; set; }   
 
-        public void AddToParking(int id, string userName,string? carNumber = null);
-        public void ExitParking(string carNumber);
-        public double CalculateAmount(string carNumber);
-        public double CalculateParkingFee(TimeSpan duration);
-        public bool PayForParking(string carNumber);
+        public void AddToParking(int id, string FirstName, string LastName, string carNumber);
+        public bool ExitParking(string carNumber);
     }
 }

@@ -12,6 +12,8 @@ public class ParkingService : IParkingService
 
     public int MaxSlots { get; set; }
 
+    AccountService accountService = new AccountService();
+
     public ParkingService(int maxSlots)
     {
         MaxSlots = maxSlots;
@@ -23,8 +25,9 @@ public class ParkingService : IParkingService
     {
         if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
         {
-                var Car = new ParkingModel(id, firstName, lastName, carNumber);
-                ListOfParkedCar.Add(Car);
+            var Car = new ParkingModel(id, firstName, lastName, carNumber);
+            ListOfParkedCar.Add(Car);
+
         }
     }
 
@@ -33,7 +36,7 @@ public class ParkingService : IParkingService
     {
         var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
 
-        if (parkedCar != null)
+        if (parkedCar != null && accountService.PayForParking(1, parkedCar.InTime))
         {
             parkedCar.ExitTime = DateTime.Now;
             return true;

@@ -28,13 +28,4 @@ public class ParkedCar : IParkedCarService
     public int Id { get; set; }
     public int MaxSlots { get; set; }
 
-    public List<ParkedCar> ListOfParkedCar = new List<ParkedCar> { new ParkedCar(1, "Bogdan",  "abc"), new ParkedCar(2, "Andrei",  "abcde")};
-    // public void AddToParking(int id, string userName,string? carNumber = null)
-    // {
-    //     if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
-    //     {
-    //             var Car = new ParkedCar(id, userName, carNumber);
-    //             ListOfParkedCar.Add(Car);
-    //     }
-    // }
 }

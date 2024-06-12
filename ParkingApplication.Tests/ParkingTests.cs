@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Security.Cryptography;
 using System.Threading.Tasks.Dataflow;
 using System.Xml;
@@ -34,9 +35,11 @@ public class ParkingTests
         var expectedCarSlots = 3;
         ParkingService parkingService = new ParkingService(4);
 
-        parkingService.AddToParking(5, "Tudor", "Ionescut", "abc");
+        parkingService.AddToParking(5, "Tudor", "Ionescu", "abcewr");
 
+        var addedCar = parkingService.ListOfParkedCar.FirstOrDefault(car => car.CarId == 5);
         Assert.Equal(expectedCarSlots , parkingService.ListOfParkedCar.Count);
+        Assert.True(addedCar.InTime <= DateTime.Now);
     }
 
     [Fact]

@@ -1,10 +1,4 @@
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/bin/Debug/net8.0/CoverletSourceRootsMapping_ParkingApplication.Tests
-/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.csproj.AssemblyReference.cache
-/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.GeneratedMSBuildEditorConfig.editorconfig
-/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.AssemblyInfoInputs.cache
-/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.AssemblyInfo.cs
-/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.csproj.CoreCompileInputs.cache
-/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.sourcelink.json
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.deps.json
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.runtimeconfig.json
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication
@@ -113,6 +107,12 @@
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.dll
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.pdb
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.csproj.AssemblyReference.cache
+/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.GeneratedMSBuildEditorConfig.editorconfig
+/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.AssemblyInfoInputs.cache
+/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.AssemblyInfo.cs
+/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.csproj.CoreCompileInputs.cache
+/Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.sourcelink.json
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingA.868639ED.Up2Date
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/ParkingApplication.Tests.dll
 /Users/bogdan/ParkingAplication/ParkingApplication.Tests/obj/Debug/net8.0/refint/ParkingApplication.Tests.dll

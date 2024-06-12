@@ -1,3 +1,4 @@
+using System.Timers;
 using System.Security.Cryptography;
 using System.Threading.Tasks.Dataflow;
 using System.Xml;
@@ -50,6 +51,18 @@ namespace ParkingApplication.Tests
             var result = accountService.PayForParking(3, DateTime.Now);
 
             Assert.Equal(boolResult, result);
+        }
+
+        [Fact]
+        public void CalculateParkingFee_FirstHourFree_ReturnSameAmount()
+        {
+
+            TimeSpan duration = TimeSpan.FromHours(1);
+            var accountService = new AccountService();
+
+            double fee = accountService.CalculateParkingFee(duration);
+
+            Assert.Equal(0 , fee);
         }
 
         // [Fact]

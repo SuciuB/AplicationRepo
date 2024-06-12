@@ -26,7 +26,7 @@ namespace ParkingApplication
             return true;
         }
 
-        private double CalculateParkingFee(TimeSpan duration)
+        public double CalculateParkingFee(TimeSpan duration)
         {
             const double ratePerHour = 5.0;
 

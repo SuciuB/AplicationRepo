@@ -7,13 +7,13 @@ namespace ParkingApplication
 {
     public class AccountModel
     {
-        public int Id { get; set; }
+        public int AccountId { get; set; }
         public double Money { get; set; }
         public int UserId { get; set; }
 
     public AccountModel(int id, double money, int userId)
     {
-        Id = id;
+        AccountId = id;
         Money = money;
         UserId = userId;
     }

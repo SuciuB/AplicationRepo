@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System;
 using Xunit;
+using Moq;
 using ParkingApplication;
 
 namespace ParkingApplication.Tests;
@@ -21,9 +22,10 @@ public class ParkingTests
     {
 
         var expectedCarSlots = 2;
-        ParkingService parkingService = new ParkingService(2);
+        var accountServiceMock = new Mock<IAccountService>();
+        ParkingService parkingService = new ParkingService(accountServiceMock.Object, 2);
 
-        parkingService.AddToParking(4,"Vasile", "Popescu", "abc");
+        parkingService.AddToParking(4, "abc");
 
         Assert.Equal(expectedCarSlots, parkingService.ListOfParkedCar.Count);
     }
@@ -33,9 +35,10 @@ public class ParkingTests
     {
 
         var expectedCarSlots = 3;
-        ParkingService parkingService = new ParkingService(4);
+        var accountServiceMock = new Mock<IAccountService>();
+        ParkingService parkingService = new ParkingService(accountServiceMock.Object, 4);
 
-        parkingService.AddToParking(5, "Tudor", "Ionescu", "abcewr");
+        parkingService.AddToParking(5, "abcewr");
 
         var addedCar = parkingService.ListOfParkedCar.FirstOrDefault(car => car.CarId == 5);
         Assert.Equal(expectedCarSlots , parkingService.ListOfParkedCar.Count);
@@ -46,10 +49,11 @@ public class ParkingTests
     public void AddToParking_CountingObjects_CountingThroughList()
     {
 
-        ParkingService parkingService = new ParkingService(2);
+        var accountServiceMock = new Mock<IAccountService>();
+        ParkingService parkingService = new ParkingService(accountServiceMock.Object, 2);
         var listCount = parkingService.ListOfParkedCar.Count;
 
-        parkingService.AddToParking(6, "Tudor", "Stoian", "def");
+        parkingService.AddToParking(6, "def");
 
         Assert.Equal(listCount , parkingService.ListOfParkedCar.Count);
     }
@@ -58,7 +62,10 @@ public class ParkingTests
     public void ExitParking_ExitingParking_ExitParkingDate()
     {
         var boolResult = true;
-        ParkingService parkingService = new ParkingService(2);
+        
+        var accountServiceMock = new Mock<IAccountService>();
+        accountServiceMock.Setup(x => x.PayForParking(1, It.IsAny<DateTime>())).Returns(true);
+        ParkingService parkingService = new ParkingService(accountServiceMock.Object, 2);
 
         var result = parkingService.ExitParking("abc");
 
@@ -69,7 +76,9 @@ public class ParkingTests
     public void ExitParking_CkeckingForCarNumber_CarStillParked()
     {
         var boolResult = false;
-        ParkingService parkingService = new ParkingService(2);
+        var accountServiceMock = new Mock<IAccountService>();
+        accountServiceMock.Setup(x => x.PayForParking(2, It.IsAny<DateTime>())).Returns(false);
+        ParkingService parkingService = new ParkingService(accountServiceMock.Object, 2);
 
         var result = parkingService.ExitParking("abcred");
 

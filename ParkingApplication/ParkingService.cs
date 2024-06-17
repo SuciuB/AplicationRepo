@@ -2,30 +2,30 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using Microsoft.VisualBasic;
+using ParkingApplication;
 
 namespace ParkingApplication;
-
-using ParkingApplication;
 
 public class ParkingService : IParkingService
 {      
 
     public int MaxSlots { get; set; }
 
-    AccountService accountService = new AccountService();
+    private readonly IAccountService _accountService;
 
-    public ParkingService(int maxSlots)
+    public ParkingService(IAccountService accountService, int maxSlots)
     {
+        _accountService = accountService;
         MaxSlots = maxSlots;
     }
 
-    public List<ParkingModel> ListOfParkedCar = new List<ParkingModel> { new ParkingModel(1, "Bogdan", "Suciu",  "abc"), new ParkingModel(2, "Andrei", "Suciu",  "abcde")};
+    public List<ParkingModel> ListOfParkedCar = new List<ParkingModel> { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde")};
 
-    public void AddToParking(int id, string firstName, string lastName, string carNumber)
+    public void AddToParking(int id, string carNumber)
     {
         if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
         {
-            var Car = new ParkingModel(id, firstName, lastName, carNumber);
+            var Car = new ParkingModel(id, carNumber);
             ListOfParkedCar.Add(Car);
 
         }
@@ -36,7 +36,7 @@ public class ParkingService : IParkingService
     {
         var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
 
-        if (parkedCar != null && accountService.PayForParking(1, parkedCar.InTime))
+        if (parkedCar != null && _accountService.PayForParking(1, parkedCar.InTime))
         {
             parkedCar.ExitTime = DateTime.Now;
             return true;

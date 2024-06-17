@@ -17,7 +17,7 @@ namespace ParkingApplication
 
             double amountToPay = CalculateParkingFee(duration);
 
-            var account = ListOfAccounts.Find(acc => acc.Id == userId);
+            var account = ListOfAccounts.Find(acc => acc.AccountId == userId);
 
             if (account == null || account.Money < amountToPay) return false;
             

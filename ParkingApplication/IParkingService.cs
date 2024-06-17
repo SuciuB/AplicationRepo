@@ -8,8 +8,7 @@ namespace ParkingApplication
     public interface IParkingService
     {
         public int MaxSlots { get; set; }   
-
-        public void AddToParking(int id, string FirstName, string LastName, string carNumber);
+        public void AddToParking(int id, string carNumber);
         public bool ExitParking(string carNumber);
     }
 }

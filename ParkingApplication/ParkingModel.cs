@@ -8,17 +8,13 @@ namespace ParkingApplication
     public class ParkingModel
     {
         public int CarId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string CarNumber { get; set; }
         public DateTime InTime { get; set; }
         public DateTime? ExitTime { get; set; }
 
-        public ParkingModel(int carId, string firstName, string lastName, string carNumber)
+        public ParkingModel(int carId, string carNumber)
         {
             CarId = carId;
-            FirstName = firstName;
-            LastName = lastName;
             CarNumber = carNumber;
             InTime = DateTime.Now;
             ExitTime = null;

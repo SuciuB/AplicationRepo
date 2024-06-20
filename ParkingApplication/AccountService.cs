@@ -17,13 +17,20 @@ namespace ParkingApplication
 
             double amountToPay = CalculateParkingFee(duration);
 
-            var account = ListOfAccounts.Find(acc => acc.AccountId == userId);
+            var accountList = ListOfAccounts.Where(acc => acc.UserId == userId);
 
-            if (account == null || account.Money < amountToPay) return false;
-            
-            account.Money -= amountToPay;
+            foreach(var account in accountList)
+            {
+                if (accountList != null && account.Money >= amountToPay)
+                {
+                    account.Money -= amountToPay;
 
-            return true;
+                    return true;
+                } 
+                
+            }
+
+            return false;
         }
 
         public double CalculateParkingFee(TimeSpan duration)

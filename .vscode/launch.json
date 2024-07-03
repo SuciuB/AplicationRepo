@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Test",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.Tests.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/ParkingApplication.Tests",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "justMyCode": true
+        }
+    ]
+}

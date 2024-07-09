@@ -8,8 +8,11 @@ namespace ParkingApplication
 {
     public class AccountService : IAccountService
     {
-        public List<AccountModel> ListOfAccounts = new List<AccountModel> {new AccountModel(1, 500, 1), new AccountModel(2, 200, 2)};
-
+       public List<AccountModel> ListOfAccounts { get; private set; } = new List<AccountModel>
+    {
+        new AccountModel(1, 500, 1),
+        new AccountModel(2, 200, 2)
+    };
 
         public bool PayForParking(int userId, DateTime inTime)
         {

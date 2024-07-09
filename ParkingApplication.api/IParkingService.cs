@@ -11,6 +11,6 @@ namespace ParkingApplication
         List<ParkingModel> ListOfParkedCar { get; }
         public int MaxSlots { get; set; }   
         public void AddToParking(int id, string carNumber);
-        //public bool ExitParking(string carNumber);
+        public bool ExitParking(string carNumber);
     }
 }

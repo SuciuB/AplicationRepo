@@ -1,60 +1,57 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using ParkingApplication;
 
-namespace ParkingApplication.Controllers
+
+[ApiController]
+[Route("api/[controller]")]
+public class ParkingController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ParkingController : ControllerBase
+    private readonly IParkingService _parkingService;
+
+    public ParkingController(IParkingService parkingService)
     {
-        private readonly IParkingService _parkingService;
+        _parkingService = parkingService;
+    }
 
-        public ParkingController(IParkingService parkingService)
+    // Endpoint to retrieve list of parked cars
+    [HttpGet]
+    public ActionResult<List<ParkingModel>> GetListOfParkedCars()
+    {
+        return Ok(_parkingService.ListOfParkedCar);
+    }
+
+    // Endpoint to add a car to parking
+    [HttpPost("add-to-parking")]
+    public IActionResult AddToParking([FromBody] ParkingModel car)
+    {
+        try
         {
-            _parkingService = parkingService;
+            _parkingService.AddToParking(car.CarId, car.CarNumber);
+            return Ok();
         }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
-
-            {
-                return await Task.FromResult(Ok("Merge"));
-            }
-
-        // [HttpPost("park")]
-        // public IActionResult AddToParking(int CarId, string CarNumber)
-        // {
-        //     try
-        //     {
-        //         _parkingService.AddToParking(CarId, CarNumber);
-        //         return Ok("Car added to parking successfully.");
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return StatusCode(500, $"Internal server error: {ex.Message}");
-        //     }
-        // }
-
-        // [HttpDelete("exit")]
-        // public IActionResult ExitParking(string CarNumber)
-        // {
-        //     try
-        //     {
-        //         bool exited = _parkingService.ExitParking(CarNumber);
-        //         if (exited)
-        //         {
-        //             return Ok("Car exited from parking successfully.");
-        //         }
-        //         else
-        //         {
-        //             return NotFound("Car not found in parking.");
-        //         }
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return StatusCode(500, $"Internal server error: {ex.Message}");
-        //     }
-        // }
+    // Endpoint to exit from parking
+    [HttpDelete("exit-parking/{carNumber}")]
+    public IActionResult ExitParking(string carNumber)
+    {
+        try
+        {
+            bool exited = _parkingService.ExitParking(carNumber);
+            if (exited)
+                return Ok("Car exited from parking successfully.");
+            else
+                return NotFound("Car not found or payment not processed.");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

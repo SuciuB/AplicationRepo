@@ -13,13 +13,13 @@ public class ParkingService : IParkingService
 
     private readonly IAccountService _accountService;
 
-    public ParkingService(IAccountService accountService, int maxSlots)
+    public ParkingService(IAccountService accountService)
     {
         _accountService = accountService;
-        MaxSlots = maxSlots;
+        MaxSlots = 50;
     }
 
-    public List<ParkingModel> ListOfParkedCar = new List<ParkingModel> { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde")};
+    public List<ParkingModel> ListOfParkedCar { get; } = new List<ParkingModel>  { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde") };
 
     public void AddToParking(int id, string carNumber)
     {

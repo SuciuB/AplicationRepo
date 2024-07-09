@@ -7,6 +7,7 @@ namespace ParkingApplication
 {
     public interface IAccountService
     {
+        List<AccountModel> ListOfAccounts { get; }
         public bool PayForParking(int carId, DateTime inTime);
     }
 }

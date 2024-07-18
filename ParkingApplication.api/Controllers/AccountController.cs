@@ -1,36 +1,38 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using ParkingApplication;
+using ParkingApplication.Interfaces;
+using ParkingApplication.Models;
+using ParkingApplication.Api.Models;
 
-namespace ParkingApplication.Controllers
+namespace ParkingApplication.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+
+public class AccountsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    private readonly IAccountService _accountService;
+
+    public AccountsController(IAccountService accountService)
     {
-        private readonly IAccountService _accountService;
+        _accountService = accountService;
+    }
 
-        public AccountController(IAccountService accountService)
+    [HttpGet]
+    public ActionResult<List<AccountModel>> GetAccounts()
+    {
+        return Ok(_accountService.ListOfAccounts);
+    }
+
+    [HttpPost("Payments")]
+    public ActionResult PayForParking([FromBody] PayForParkingRequestModel requestModel)
+    {
+        var result = _accountService.PayForParking(requestModel.UserId, requestModel.InTime);
+        if (result)
         {
-            _accountService = accountService;
+            return Ok("Payment successful.");
         }
-
-        [HttpGet("accounts")]
-        public ActionResult<List<AccountModel>> GetAccounts()
-        {
-            return Ok(_accountService.ListOfAccounts);
-        }
-
-        [HttpPost("payForParking")]
-        public IActionResult PayForParking(int userId, DateTime inTime)
-        {
-            var result = _accountService.PayForParking(userId, inTime);
-            if (result)
-            {
-                return Ok("Payment successful.");
-            }
-            return BadRequest("Insufficient funds.");
-        }
-
+        return BadRequest("Insufficient funds.");
     }
 }
+

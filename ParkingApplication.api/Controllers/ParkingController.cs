@@ -1,28 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using ParkingApplication;
+using ParkingApplication.Interfaces;
+using ParkingApplication.Models;
 
+namespace ParkingApplication.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ParkingController : ControllerBase
+    [ApiController]
+    [Route("api/[controller]")]
+    
+public class ParkedCarsController : ControllerBase
 {
     private readonly IParkingService _parkingService;
 
-    public ParkingController(IParkingService parkingService)
-    {
+    public ParkedCarsController (IParkingService parkingService)
+    { 
         _parkingService = parkingService;
     }
 
-    // Endpoint to retrieve list of parked cars
     [HttpGet]
     public ActionResult<List<ParkingModel>> GetListOfParkedCars()
     {
         return Ok(_parkingService.ListOfParkedCar);
     }
 
-    // Endpoint to add a car to parking
     [HttpPost("add-to-parking")]
     public IActionResult AddToParking([FromBody] ParkingModel car)
     {
@@ -37,7 +38,6 @@ public class ParkingController : ControllerBase
         }
     }
 
-    // Endpoint to exit from parking
     [HttpDelete("exit-parking/{carNumber}")]
     public IActionResult ExitParking(string carNumber)
     {

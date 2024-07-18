@@ -19,5 +19,4 @@ public class ParkingModel
         InTime = DateTime.Now;
         ExitTime = null;
     }
-
 }

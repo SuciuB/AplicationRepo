@@ -26,5 +26,4 @@ public class ParkedCar : IParkedCarService
     public int UserId { get; set; }
     public int Id { get; set; }
     public int MaxSlots { get; set; }
-
 }

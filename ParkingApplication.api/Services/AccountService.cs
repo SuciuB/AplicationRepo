@@ -15,40 +15,37 @@ public class AccountService : IAccountService
     new AccountModel(2, 200, 2)
 };
 
-    public bool PayForParking(int userId, DateTime inTime)
+public bool PayForParking(int userId, DateTime inTime)
+{
+    TimeSpan duration = DateTime.Now - inTime;
+
+    double amountToPay = CalculateParkingFee(duration);
+
+    var accountList = ListOfAccounts.Where(acc => acc.UserId == userId);
+
+    foreach(var account in accountList)
     {
-        TimeSpan duration = DateTime.Now - inTime;
-
-        double amountToPay = CalculateParkingFee(duration);
-
-        var accountList = ListOfAccounts.Where(acc => acc.UserId == userId);
-
-        foreach(var account in accountList)
+        if (accountList != null && account.Money >= amountToPay)
         {
-            if (accountList != null && account.Money >= amountToPay)
-            {
-                account.Money -= amountToPay;
+            account.Money -= amountToPay;
 
-                return true;
-            } 
-            
-        }
+            return true;
+        } 
+    }
+            return false;
+}
+public double CalculateParkingFee(TimeSpan duration)
+{
+    const double ratePerHour = 5.0;
 
-        return false;
+    if(duration.Hours <= 1)
+    {
+        return 0;
     }
 
-    public double CalculateParkingFee(TimeSpan duration)
-    {
-        const double ratePerHour = 5.0;
+    var payableHours = duration.Hours -1;
+    var calculatePayment =  payableHours * ratePerHour;
 
-        if(duration.Hours <= 1)
-        {
-            return 0;
-        }
-
-        var payableHours = duration.Hours -1;
-        var calculatePayment =  payableHours * ratePerHour;
-
-        return calculatePayment;
-    }
+    return calculatePayment;
+}
 }

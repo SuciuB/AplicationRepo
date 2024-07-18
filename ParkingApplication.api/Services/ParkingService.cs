@@ -32,7 +32,6 @@ public class ParkingService : IParkingService
         }
     }
 
-
     public bool ExitParking(string carNumber)
     {
         var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);

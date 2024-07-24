@@ -21,10 +21,10 @@ public class ParkedCarsController : ControllerBase
     [HttpGet]
     public ActionResult<List<ParkingModel>> GetListOfParkedCars()
     {
-        return Ok(_parkingService.ListOfParkedCar);
+        return Ok(_parkingService.GetParkedCar);
     }
 
-    [HttpPost("add-to-parking")]
+    [HttpPost("parking")]
     public IActionResult AddToParking([FromBody] ParkingModel car)
     {
         try
@@ -38,7 +38,7 @@ public class ParkedCarsController : ControllerBase
         }
     }
 
-    [HttpDelete("exit-parking/{carNumber}")]
+    [HttpDelete("parked-car/{carNumber}")]
     public IActionResult ExitParking(string carNumber)
     {
         try

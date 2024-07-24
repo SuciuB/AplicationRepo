@@ -20,21 +20,21 @@ public class ParkingService : IParkingService
         MaxSlots = 50;
     }
 
-    public List<ParkingModel> ListOfParkedCar { get; } = new List<ParkingModel>  { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde") };
+    public List<ParkingModel> GetParkedCar { get; } = new List<ParkingModel>  { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde") };
 
     public void AddToParking(int id, string carNumber)
     {
-        if(ListOfParkedCar.Count < MaxSlots && carNumber != null)
+        if(GetParkedCar.Count < MaxSlots && carNumber != null)
         {
             var Car = new ParkingModel(id, carNumber);
-            ListOfParkedCar.Add(Car);
+            GetParkedCar.Add(Car);
 
         }
     }
 
     public bool ExitParking(string carNumber)
     {
-        var parkedCar = ListOfParkedCar.Find(car => car.CarNumber == carNumber);
+        var parkedCar = GetParkedCar.Find(car => car.CarNumber == carNumber);
 
         if (parkedCar != null && _accountService.PayForParking(1, parkedCar.InTime))
         {

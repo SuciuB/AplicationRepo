@@ -11,7 +11,7 @@ namespace ParkingApplication.Controllers;
 
 public class AccountsController : ControllerBase
 {
-    private readonly IAccountService _accountService;
+    private readonly IAccountService _accountService; 
 
     public AccountsController(IAccountService accountService)
     {

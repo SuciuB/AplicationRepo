@@ -40,12 +40,12 @@ public class ParkingControllerIntegrationTests
         };
 
         // Act
-        var response = await client.PostAsJsonAsync("/api/ParkedCars/add-to-parking", car);
+        var response = await client.PostAsJsonAsync("/api/ParkedCars/parking", car);
 
         // Assert
         response.EnsureSuccessStatusCode();
 
-        await client.DeleteAsync($"/api/ParkedCars/exit-parking/{car.CarNumber}");
+        await client.DeleteAsync($"/api/ParkedCars/parked-car/{car.CarNumber}");
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class ParkingControllerIntegrationTests
         };
 
         // Act
-        var response = await client.DeleteAsync($"/api/ParkedCars/exit-parking/{carNumber}");
+        var response = await client.DeleteAsync($"/api/ParkedCars/parked-car/{carNumber}");
 
         // Assert
         response.EnsureSuccessStatusCode();
@@ -77,7 +77,7 @@ public class ParkingControllerIntegrationTests
         };
 
         // Act
-        var response = await client.DeleteAsync($"/api/ParkedCars/exit-parking/{carNumber}");
+        var response = await client.DeleteAsync($"/api/ParkedCars/parked-car/{carNumber}");
 
         // Assert
         Assert.Equal(System.Net.HttpStatusCode.NotFound, response.StatusCode);

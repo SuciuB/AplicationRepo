@@ -2,8 +2,8 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using Microsoft.VisualBasic;
-using ParkingApplication.Interfaces;
-using ParkingApplication.Models;
+using ParkingApplication.Api.Interfaces;
+using ParkingApplication.Api.Models;
 
 namespace ParkingApplication.Services;
 

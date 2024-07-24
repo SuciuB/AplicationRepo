@@ -1,5 +1,5 @@
 
-using ParkingApplication.Interfaces;
+using ParkingApplication.Api.Interfaces;
 
 namespace ParkingApplication.Services;
 

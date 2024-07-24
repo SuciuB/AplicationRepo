@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using ParkingApplication.Interfaces;
-using ParkingApplication.Models;
+using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Models;
 
 namespace ParkingApplication.Controllers;

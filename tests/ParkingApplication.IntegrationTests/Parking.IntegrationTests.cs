@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
-using ParkingApplication.Models;
+using ParkingApplication.Api.Models;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Json;
 

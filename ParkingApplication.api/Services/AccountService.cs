@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
-using ParkingApplication.Interfaces;
-using ParkingApplication.Models;
+using ParkingApplication.Api.Interfaces;
+using ParkingApplication.Api.Models;
 
 namespace ParkingApplication.Services;
 public class AccountService : IAccountService

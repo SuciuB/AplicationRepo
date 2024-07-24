@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ParkingApplication.Services;
-using ParkingApplication.Interfaces;
+using ParkingApplication.Api.Interfaces;
 
 var builder = WebApplication.CreateBuilder();
 

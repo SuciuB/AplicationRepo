@@ -22,11 +22,11 @@ public class ParkingService : IParkingService
 
     public List<ParkingModel> GetParkedCar { get; } = new List<ParkingModel>  { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde") };
 
-    public void AddToParking(int id, string carNumber)
+    public void AddToParking(int userId, string carNumber)
     {
         if(GetParkedCar.Count < MaxSlots && carNumber != null)
         {
-            var Car = new ParkingModel(id, carNumber);
+            var Car = new ParkingModel(userId, carNumber);
             GetParkedCar.Add(Car);
 
         }

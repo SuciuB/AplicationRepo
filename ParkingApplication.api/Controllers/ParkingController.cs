@@ -29,13 +29,13 @@ public class ParkedCarsController : ControllerBase
     {
         try
         {
-            _parkingService.AddToParking(car.CarId, car.CarNumber);
+            _parkingService.AddToParking(car.UserId, car.CarNumber);
             return Ok();
         }
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
-        }
+        } 
     }
 
     [HttpDelete("parked-car/{carNumber}")]

@@ -8,5 +8,5 @@ namespace ParkingApplication.Api.Interfaces;
 public interface IAccountService
 {
     List<AccountModel> ListOfAccounts { get; }
-    public bool PayForParking(int carId, DateTime inTime);
+    public bool PayForParking(int userId, DateTime inTime);
 }

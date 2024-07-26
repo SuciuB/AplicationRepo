@@ -11,8 +11,8 @@ public class AccountService : IAccountService
 {
     public List<AccountModel> ListOfAccounts { get; private set; } = new List<AccountModel>
 {
-    new AccountModel(1, 500, 1),
-    new AccountModel(2, 200, 2)
+    new AccountModel(1, 500),
+    new AccountModel(2, 200)
 };
 
 public bool PayForParking(int userId, DateTime inTime)

@@ -7,14 +7,12 @@ namespace ParkingApplication.Api.Models;
 
 public class AccountModel
 {
-    public int AccountId { get; set; }
     public double Money { get; set; }
     public int UserId { get; set; }
 
-    public AccountModel(int id, double money, int userId)
+    public AccountModel(int userId, double money)
     {
-        AccountId = id;
-        Money = money;
         UserId = userId;
+        Money = money;
     }
 }

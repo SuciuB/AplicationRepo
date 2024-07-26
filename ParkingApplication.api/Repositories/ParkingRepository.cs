@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ParkingApplication.Api.Interfaces;
+using ParkingApplication.Api.Models;
 
-namespace Repositories
+namespace ParkingApplication.Api.Repositories
 {
-    public class ParkingRepository : IQueryRepository<ParkingModel>, ICommandsRepository
+    public class ParkingRepository : IQueryRepository<ParkingModel>, ICommandRepository<ParkingModel>
     {
         private List<ParkingModel> _parkedCars = new List<ParkingModel>
         {
@@ -24,13 +25,9 @@ namespace Repositories
                 _parkedCars.Add(parkingModel);
         }
 
-        public void Delete(int id)
+        public void Delete(ParkingModel parkingModel)
         {
-            var parkedCar = _parkedCars.FirstOrDefault(p => p.Id = id);
-            if(parkedCar != null)
-            {
-                _parkedCars.Remove(parkedCar);
-            }
+            _parkedCars.Remove(parkingModel);
         }
 
     }

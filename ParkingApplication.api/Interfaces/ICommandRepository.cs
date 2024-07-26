@@ -6,9 +6,9 @@ using ParkingApplication.Api.Models;
 
 namespace ParkingApplication.Api.Interfaces
 {
-    public interface ICommandRepository
+    public interface ICommandRepository<T>
     {
-        void Create(ParkingModel parkingModel);
-        void Delete(int id);
+        void Create(T model);
+        void Delete(T model);
     }
 }

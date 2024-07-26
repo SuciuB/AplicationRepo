@@ -29,7 +29,7 @@ public class ParkedCarsController : ControllerBase
     {
         try
         {
-            _parkingService.AddToParking(car.UserId, car.CarNumber);
+            _parkingService.AddToParking(car.Id, car.CarNumber);
             return Ok();
         }
         catch (Exception ex)

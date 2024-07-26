@@ -7,14 +7,14 @@ namespace ParkingApplication.Api.Models;
 
 public class ParkingModel
 {
-    public int UserId { get; set; }
+    public int Id { get; set; }
     public string CarNumber { get; set; }
     public DateTime InTime { get; set; }
     public DateTime? ExitTime { get; set; }
 
-    public ParkingModel(int userId, string carNumber)
+    public ParkingModel(int id, string carNumber)
     {
-        UserId = userId;
+        Id = id;
         CarNumber = carNumber;
         InTime = DateTime.Now;
         ExitTime = null;

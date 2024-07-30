@@ -21,7 +21,7 @@ public class ParkedCarsController : ControllerBase
     [HttpGet]
     public ActionResult<List<ParkingModel>> GetListOfParkedCars()
     {
-        return Ok(_parkingService.GetParkedCar);
+        return Ok(_parkingService.GetAllCars());
     }
 
     [HttpPost("parking")]

@@ -7,7 +7,7 @@ using ParkingApplication.Api.Models;
 namespace ParkingApplication.Controllers;
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/parked-car")]
     
 public class ParkedCarsController : ControllerBase
 {
@@ -38,7 +38,7 @@ public class ParkedCarsController : ControllerBase
         } 
     }
 
-    [HttpDelete("parked-car/{carNumber}")]
+    [HttpDelete("{carNumber}")]
     public IActionResult ExitParking(string carNumber)
     {
         try

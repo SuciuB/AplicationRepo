@@ -66,7 +66,7 @@ public class ParkingService : IParkingService
         var getCars = _queryRepository.GetAll();
         var parkedCar = getCars.Find(car => car.CarNumber == carNumber);
 
-        if (parkedCar != null && _accountService.PayForParking(1, parkedCar.InTime))
+        if (parkedCar != null && _accountService.PayForParking(parkedCar.Id, parkedCar.InTime))
         {
             parkedCar.ExitTime = DateTime.Now;
             return true;

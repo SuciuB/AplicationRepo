@@ -19,6 +19,7 @@ public AccountService(IQueryRepository<AccountModel> queryRepository = null)
     {
         queryRepository = new AccountRepository();
     }
+    _queryRepository = queryRepository;
 }
 public List<AccountModel> GetAllCars()
     {

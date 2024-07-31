@@ -7,7 +7,6 @@ using ParkingApplication.Api.Interfaces;
 
 var builder = WebApplication.CreateBuilder();
 
-// Add services to the container.
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IParkingService, ParkingService>();
 builder.Services.AddControllers();
@@ -23,7 +22,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Models;
+using ParkingApplication.Api.Repositories;
 
 namespace ParkingApplication.Controllers;
 
@@ -20,7 +21,7 @@ public class AccountsController : ControllerBase
     [HttpGet]
     public ActionResult<List<AccountModel>> GetAccounts()
     {
-        return Ok(_accountService.ListOfAccounts);
+        return Ok(_accountService.GetAllCars());
     }
 
     [HttpPost("Payments")]

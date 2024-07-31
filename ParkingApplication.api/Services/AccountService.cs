@@ -5,15 +5,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Models;
+using Repositories;
 
 namespace ParkingApplication.Services;
 public class AccountService : IAccountService
 {
-    public List<AccountModel> ListOfAccounts { get; private set; } = new List<AccountModel>
+
+private readonly IQueryRepository<AccountModel> _queryRepository;
+
+public AccountService(IQueryRepository<AccountModel> queryRepository = null)
 {
-    new AccountModel(1, 500),
-    new AccountModel(2, 200)
-};
+    if(queryRepository == null)
+    {
+        queryRepository = new AccountRepository();
+    }
+}
+public List<AccountModel> GetAllCars()
+    {
+        return _queryRepository.GetAll();
+    }
 
 public bool PayForParking(int userId, DateTime inTime)
 {
@@ -21,7 +31,8 @@ public bool PayForParking(int userId, DateTime inTime)
 
     double amountToPay = CalculateParkingFee(duration);
 
-    var accountList = ListOfAccounts.Where(acc => acc.UserId == userId);
+    var getAccount = _queryRepository.GetAll();
+    var accountList = getAccount.Where(acc => acc.UserId == userId);
 
     foreach(var account in accountList)
     {

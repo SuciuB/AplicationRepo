@@ -17,10 +17,21 @@ public class ParkingService : IParkingService
     private readonly IQueryRepository<ParkingModel> _queryRepository;
     private readonly IAccountService _accountService;
 
-    public ParkingService(IAccountService accountService)
+    public ParkingService(IAccountService accountService, ICommandRepository<ParkingModel> commandRepository = null, IQueryRepository<ParkingModel> queryRepository = null)
     {
-        _queryRepository = new ParkingRepository();
-        _commandRepository = new ParkingRepository();
+        if(commandRepository == null)
+        {
+            commandRepository = new ParkingRepository();
+        }
+
+        if(queryRepository == null)
+        {
+            queryRepository = new ParkingRepository();
+        }
+
+
+        _queryRepository = queryRepository;
+        _commandRepository = commandRepository;
         _accountService = accountService;
         MaxSlots = 50;
     }
@@ -38,8 +49,6 @@ public class ParkingService : IParkingService
     {
         _commandRepository.Delete(parkingModel);
     }
-
-    // public List<ParkingModel> GetParkedCar { get; } = new List<ParkingModel>  { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde") };
 
     public void AddToParking(int userId, string carNumber)
     {

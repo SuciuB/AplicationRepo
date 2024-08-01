@@ -1,21 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ParkingApplication.Api.Interfaces;
-using ParkingApplication.Api.Repositories;
+using Repositories;
 using ParkingApplication.Api.Models;
-
+using ParkingApplication.Api.Repositories;
 
 namespace ParkingApplication.Api.Factories
 {
     public class RepositoryFactory : IRepositoryFactory
     {
-         public IQueryRepository<T> CreateQueryRepository<T>()
+        public IQueryRepository<T> CreateQueryRepository<T>()
         {
             if (typeof(T) == typeof(ParkingModel))
             {
                 return (IQueryRepository<T>)new ParkingRepository();
+            }
+            if (typeof(T) == typeof(AccountModel))
+            {
+                return (IQueryRepository<T>)new AccountRepository();
             }
 
             throw new ArgumentException("No repository found for the specified model type.");
@@ -27,7 +27,6 @@ namespace ParkingApplication.Api.Factories
             {
                 return (ICommandRepository<T>)new ParkingRepository();
             }
-
             throw new ArgumentException("No repository found for the specified model type.");
         }
     }

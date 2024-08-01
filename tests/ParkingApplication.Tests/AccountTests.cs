@@ -1,74 +1,98 @@
-using System.Timers;
-using System.Security.Cryptography;
-using System.Threading.Tasks.Dataflow;
-using System.Xml;
-using System.Data.SqlTypes;
-using System.Data;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System;
 using Xunit;
 using Moq;
 using ParkingApplication.Services;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Models;
+using System;
+using System.Collections.Generic;
 
 namespace ParkingApplication.Tests
 {
-    public class AccountTests
+public class AccountTests
+{
+[Fact]
+public void PayForParking_AmountToPay_PayForHoursParked()
+{
+    // Arrange
+    var factoryMock = new Mock<IRepositoryFactory>();
+    var queryRepositoryMock = new Mock<IQueryRepository<AccountModel>>();
+    var initialAccounts = new List<AccountModel>
     {
-        [Fact]
-        public void PayForParking_AmountToPay_PayForHoursParked()
-        {
+        new AccountModel(1, 500),
+        new AccountModel(2, 300)
+    };
 
-            var boolResult = true;
-            AccountService accountService = new AccountService();
+    queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialAccounts);
+    factoryMock.Setup(f => f.CreateQueryRepository<AccountModel>())
+                .Returns(queryRepositoryMock.Object);
 
-            var result = accountService.PayForParking(2, DateTime.Now.AddHours(-4));
+    var accountService = new AccountService(factoryMock.Object);
 
-            Assert.Equal(boolResult, result);
-        }
+    // Act
+    var result = accountService.PayForParking(2, DateTime.Now.AddHours(-4));
 
-        [Fact]
-        public void PayForParking_AmountToPay_NotHavingMoney()
-        {
+    // Assert
+    Assert.True(result);
+}
 
-            var boolResult = false;
-            AccountService accountService = new AccountService();
-            AccountModel accountModel = new AccountModel(3, 10);
-            var accountList = accountService.GetAllCars();
-            accountList.Add(accountModel);
+[Fact]
+public void PayForParking_AmountToPay_NotHavingMoney()
+{
+    // Arrange
+    var factoryMock = new Mock<IRepositoryFactory>();
+    var queryRepositoryMock = new Mock<IQueryRepository<AccountModel>>();
+    var initialAccounts = new List<AccountModel>
+    {
+        new AccountModel(3, 10)
+    };
 
-            var result = accountService.PayForParking(3, DateTime.Now.AddHours(-4));
+    queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialAccounts);
+    factoryMock.Setup(f => f.CreateQueryRepository<AccountModel>())
+                .Returns(queryRepositoryMock.Object);
 
-            Assert.Equal(boolResult, result);
-        }
-        [Fact]
-        public void PayForParking_AmountToPay_NullId()
-        {
+    var accountService = new AccountService(factoryMock.Object);
 
-            var boolResult = false;
-            AccountService accountService = new AccountService();
+    // Act
+    var result = accountService.PayForParking(3, DateTime.Now.AddHours(-4));
 
-            var result = accountService.PayForParking(3, DateTime.Now);
+    // Assert
+    Assert.False(result);
+}
 
-            Assert.Equal(boolResult, result);
-        }
+[Fact]
+public void PayForParking_AmountToPay_NullId()
+{
+    // Arrange
+    var factoryMock = new Mock<IRepositoryFactory>();
+    var queryRepositoryMock = new Mock<IQueryRepository<AccountModel>>();
+    var initialAccounts = new List<AccountModel>();
 
-        [Fact]
-        public void CalculateParkingFee_FirstHourFree_ReturnSameAmount()
-        {
+    queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialAccounts);
+    factoryMock.Setup(f => f.CreateQueryRepository<AccountModel>())
+                .Returns(queryRepositoryMock.Object);
 
-            TimeSpan duration = TimeSpan.FromHours(1);
-            var accountService = new AccountService();
+    var accountService = new AccountService(factoryMock.Object);
 
-            double fee = accountService.CalculateParkingFee(duration);
+    // Act
+    var result = accountService.PayForParking(3, DateTime.Now);
 
-            Assert.Equal(0 , fee);
-        }
+    // Assert
+    Assert.False(result);
+}
 
-    }
-    
+[Fact]
+public void CalculateParkingFee_FirstHourFree_ReturnSameAmount()
+{
+    // Arrange
+    TimeSpan duration = TimeSpan.FromHours(1);
+    var factoryMock = new Mock<IRepositoryFactory>();
+    var accountService = new AccountService(factoryMock.Object);
+
+    // Act
+    double fee = accountService.CalculateParkingFee(duration);
+
+    // Assert
+    Assert.Equal(0, fee);
+}
+}
 }

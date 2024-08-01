@@ -62,8 +62,7 @@ namespace ParkingApplication.Tests
         {
 
             TimeSpan duration = TimeSpan.FromHours(1);
-            var queryRepositoryMock = new Mock<IQueryRepository<AccountModel>>();
-            var accountService = new AccountService(queryRepositoryMock.Object);
+            var accountService = new AccountService();
 
             double fee = accountService.CalculateParkingFee(duration);
 

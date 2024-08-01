@@ -4,9 +4,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ParkingApplication.Services;
 using ParkingApplication.Api.Interfaces;
+using ParkingApplication.Api.Factories;
 
 var builder = WebApplication.CreateBuilder();
 
+builder.Services.AddSingleton<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IParkingService, ParkingService>();
 builder.Services.AddControllers();

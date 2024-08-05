@@ -33,7 +33,7 @@ public class ParkingControllerIntegrationTests
     public async Task AddToParking_WhenParkingAvailable_ReturnsOk()
     {
         // Arrange
-        var car = new ParkingModel(3, "abcf");
+        var car = new ParkingModel(3, "abcf", 3);
         HttpClient client = new()
         {
             BaseAddress = new Uri("http://localhost:5149")

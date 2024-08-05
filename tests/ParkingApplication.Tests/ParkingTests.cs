@@ -32,8 +32,8 @@ public void AddToParking_CarParked_SlotTaken()
 
     var initialParkedCars = new List<ParkingModel>
     {
-        new ParkingModel(1, "abc"),
-        new ParkingModel(2, "abcde")
+        new ParkingModel(1, "abc", 1),
+        new ParkingModel(2, "abcde", 2)
     };
 
     queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialParkedCars);
@@ -50,7 +50,7 @@ public void AddToParking_CarParked_SlotTaken()
     parkingService.MaxSlots = 2;
 
     // Act
-    parkingService.AddToParking(3, "abcew");
+    parkingService.AddToParking(3, "abcew", 3);
 
     // Assert
     Assert.Equal(expectedCarSlots, parkingService.GetAllCars().Count);
@@ -69,8 +69,8 @@ public void AddToParking_SlotsAvailable_SlotsFree()
 
     var initialParkedCars = new List<ParkingModel>
     {
-        new ParkingModel(1, "abc"),
-        new ParkingModel(2, "abcde")
+        new ParkingModel(1, "abc", 1),
+        new ParkingModel(2, "abcde", 2)
     };
 
     queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialParkedCars);
@@ -84,7 +84,7 @@ public void AddToParking_SlotsAvailable_SlotsFree()
     ParkingService parkingService = new ParkingService(accountServiceMock.Object, factoryMock.Object);
     
     // Act
-    parkingService.AddToParking(4, "abcew");
+    parkingService.AddToParking(4, "abcew", 3);
 
     // Assert
     commandRepositoryMock.Verify(repo => repo.Create(It.IsAny<ParkingModel>()), Times.Once);
@@ -96,6 +96,7 @@ public void AddToParking_SlotsAvailable_SlotsFree()
 [Fact]
 public void ExitParking_ExitingParking_ExitParkingDate()
 {
+    //Arrange
     var boolResult = true;
     var accountServiceMock = new Mock<IAccountService>();
     var commandRepositoryMock = new Mock<ICommandRepository<ParkingModel>>();
@@ -104,12 +105,12 @@ public void ExitParking_ExitingParking_ExitParkingDate()
 
     var initialParkedCars = new List<ParkingModel>
     {
-        new ParkingModel(1, "abc"),
-        new ParkingModel(2, "abcde")
+        new ParkingModel(1, "abc", 1),
+        new ParkingModel(2, "abcde", 2)
     };
 
     queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialParkedCars);
-    commandRepositoryMock.Setup(x => x.Delete(It.IsAny<ParkingModel>())).Callback<ParkingModel>(car => initialParkedCars.Remove(car));
+    commandRepositoryMock.Setup(x => x.GetByCarNumber("abc")).Returns(initialParkedCars.FirstOrDefault(car => car.CarNumber == "abc"));
     accountServiceMock.Setup(x => x.PayForParking(1, It.IsAny<DateTime>())).Returns(true);
 
     factoryMock.Setup(f => f.CreateQueryRepository<ParkingModel>())
@@ -119,6 +120,7 @@ public void ExitParking_ExitingParking_ExitParkingDate()
 
     ParkingService parkingService = new ParkingService(accountServiceMock.Object, factoryMock.Object);
 
+    //Act
     var result = parkingService.ExitParking("abc");
 
     // Assert
@@ -129,6 +131,8 @@ public void ExitParking_ExitingParking_ExitParkingDate()
 [Fact]
 public void ExitParking_CheckingForCarNumber_CarStillParked()
 {
+    //Arrange
+
     var boolResult = false;
     var accountServiceMock = new Mock<IAccountService>();
     var commandRepositoryMock = new Mock<ICommandRepository<ParkingModel>>();
@@ -137,8 +141,8 @@ public void ExitParking_CheckingForCarNumber_CarStillParked()
 
     var initialParkedCars = new List<ParkingModel>
     {
-        new ParkingModel(1, "abc"),
-        new ParkingModel(2, "abcde")
+        new ParkingModel(1, "abc", 1),
+        new ParkingModel(2, "abcde", 2)
     };
 
     queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialParkedCars);
@@ -151,6 +155,7 @@ public void ExitParking_CheckingForCarNumber_CarStillParked()
 
     ParkingService parkingService = new ParkingService(accountServiceMock.Object, factoryMock.Object);
 
+    //Act
     var result = parkingService.ExitParking("abcred");
 
     // Assert

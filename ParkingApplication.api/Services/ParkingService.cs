@@ -42,12 +42,12 @@ public class ParkingService : IParkingService
         _commandRepository.Delete(parkingModel);
     }
 
-    public void AddToParking(int userId, string carNumber)
+    public void AddToParking(int id, string carNumber, int userId)
     {
         var getCars = _queryRepository.GetAll();
         if(getCars.Count < MaxSlots && carNumber != null)
         {
-            var Car = new ParkingModel(userId, carNumber);
+            var Car = new ParkingModel(id, carNumber, userId);
             _commandRepository.Create(Car);
 
         }
@@ -56,7 +56,7 @@ public class ParkingService : IParkingService
     public bool ExitParking(string carNumber)
     {
         var getCars = _queryRepository.GetAll();
-        var parkedCar = getCars.Find(car => car.CarNumber == carNumber);
+        var parkedCar = _commandRepository.GetByCarNumber(carNumber);
 
         if (parkedCar != null && _accountService.PayForParking(parkedCar.Id, parkedCar.InTime))
         {

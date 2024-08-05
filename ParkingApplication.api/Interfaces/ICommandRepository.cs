@@ -8,6 +8,7 @@ namespace ParkingApplication.Api.Interfaces
 {
     public interface ICommandRepository<T>
     {
+        ParkingModel GetByCarNumber(string carNumber);
         void Create(T model);
         void Delete(T model);
     }

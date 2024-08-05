@@ -18,8 +18,8 @@ public void PayForParking_AmountToPay_PayForHoursParked()
     var queryRepositoryMock = new Mock<IQueryRepository<AccountModel>>();
     var initialAccounts = new List<AccountModel>
     {
-        new AccountModel(1, 500),
-        new AccountModel(2, 300)
+        new AccountModel(1, 500, 1),
+        new AccountModel(2, 300, 2)
     };
 
     queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialAccounts);
@@ -43,7 +43,7 @@ public void PayForParking_AmountToPay_NotHavingMoney()
     var queryRepositoryMock = new Mock<IQueryRepository<AccountModel>>();
     var initialAccounts = new List<AccountModel>
     {
-        new AccountModel(3, 10)
+        new AccountModel(3, 10, 3)
     };
 
     queryRepositoryMock.Setup(x => x.GetAll()).Returns(initialAccounts);

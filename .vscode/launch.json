@@ -20,9 +20,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/ParkingApplication.Api/bin/Debug/net8.0/ParkingApplication.Api.dll",  // Adjust the path if needed
+            "program": "${workspaceFolder}/ParkingApplication.Api/bin/Debug/net8.0/ParkingApplication.Api.dll", 
             "args": [],
-            "cwd": "${workspaceFolder}/ParkingApplication.Api",  // Adjust the path if needed
+            "cwd": "${workspaceFolder}/ParkingApplication.Api",  
             "stopAtEntry": false,
             "console": "internalConsole",
             "justMyCode": false,

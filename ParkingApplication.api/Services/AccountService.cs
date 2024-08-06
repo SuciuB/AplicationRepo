@@ -14,7 +14,7 @@ public AccountService(IRepositoryFactory repositoryFactory)
     _queryRepository = repositoryFactory.CreateQueryRepository<AccountModel>();
 }
 
-public List<AccountModel> GetAllCars()
+public List<AccountModel> GetAllAccounts()
 {
     return _queryRepository.GetAll();
 }
@@ -28,9 +28,9 @@ public bool PayForParking(int userId, DateTime inTime)
 
     foreach (var account in accountList)
     {
-        if (account.Money >= amountToPay)
+        if (account.Amount >= amountToPay)
         {
-            account.Money -= amountToPay;
+            account.Amount -= amountToPay;
             return true;
         }
     }

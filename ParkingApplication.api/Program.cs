@@ -5,8 +5,15 @@ using Microsoft.OpenApi.Models;
 using ParkingApplication.Services;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Factories;
+using ParkingApplication.Api.Repositories;
 
 var builder = WebApplication.CreateBuilder();
+
+builder.Services.AddSingleton<DbContext>(provider =>
+{
+    var connectionString = "Server=localhost,1433;Database=Parking;User Id=sa;Password=Freeze123!;";
+    return new DbContext(connectionString);
+});
 
 builder.Services.AddSingleton<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddScoped<IAccountService, AccountService>();

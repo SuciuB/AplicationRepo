@@ -6,14 +6,11 @@ using ParkingApplication.Services;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Factories;
 using ParkingApplication.Api.Repositories;
+using ParkingApplication.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder();
 
-builder.Services.AddSingleton<DbContext>(provider =>
-{
-    var connectionString = "Server=localhost,1433;Database=Parking;User Id=sa;Password=Freeze123!;";
-    return new DbContext(connectionString);
-});
+builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings"));
 
 builder.Services.AddSingleton<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddScoped<IAccountService, AccountService>();

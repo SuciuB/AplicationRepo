@@ -11,10 +11,10 @@ public class AccountModel
     public double Money { get; set; }
     public int UserId { get; set; }
 
-    public AccountModel(int id, double money, int userId)
+    public AccountModel(int accountId, double money, int userId)
     {
-        AccountId = id;
-        Money = money;
+        AccountId = accountId;
         UserId = userId;
+        Money = money;
     }
 }

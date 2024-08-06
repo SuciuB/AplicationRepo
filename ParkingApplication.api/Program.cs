@@ -4,10 +4,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ParkingApplication.Services;
 using ParkingApplication.Api.Interfaces;
+using ParkingApplication.Api.Factories;
 
 var builder = WebApplication.CreateBuilder();
 
-// Add services to the container.
+builder.Services.AddSingleton<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IParkingService, ParkingService>();
 builder.Services.AddControllers();
@@ -23,7 +24,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

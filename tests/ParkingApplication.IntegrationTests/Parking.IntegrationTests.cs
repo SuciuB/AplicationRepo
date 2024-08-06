@@ -20,7 +20,7 @@ public class ParkingControllerIntegrationTests
         };
 
         // Act
-        var response = await client.GetAsync("api/ParkedCars");
+        var response = await client.GetAsync("api/parked-car");
 
         // Assert
         response.EnsureSuccessStatusCode();
@@ -33,19 +33,19 @@ public class ParkingControllerIntegrationTests
     public async Task AddToParking_WhenParkingAvailable_ReturnsOk()
     {
         // Arrange
-        var car = new ParkingModel(3, "abcf");
+        var car = new ParkingModel(3, "abcf", 3);
         HttpClient client = new()
         {
             BaseAddress = new Uri("http://localhost:5149")
         };
 
         // Act
-        var response = await client.PostAsJsonAsync("/api/ParkedCars/parking", car);
+        var response = await client.PostAsJsonAsync("/api/parked-car/parking", car);
 
         // Assert
         response.EnsureSuccessStatusCode();
 
-        await client.DeleteAsync($"/api/ParkedCars/parked-car/{car.CarNumber}");
+        await client.DeleteAsync($"/api/parked-car/{car.CarNumber}");
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class ParkingControllerIntegrationTests
         };
 
         // Act
-        var response = await client.DeleteAsync($"/api/ParkedCars/parked-car/{carNumber}");
+        var response = await client.DeleteAsync($"/api/parked-car/{carNumber}");
 
         // Assert
         response.EnsureSuccessStatusCode();
@@ -77,7 +77,7 @@ public class ParkingControllerIntegrationTests
         };
 
         // Act
-        var response = await client.DeleteAsync($"/api/ParkedCars/parked-car/{carNumber}");
+        var response = await client.DeleteAsync($"/api/parked-car/{carNumber}");
 
         // Assert
         Assert.Equal(System.Net.HttpStatusCode.NotFound, response.StatusCode);

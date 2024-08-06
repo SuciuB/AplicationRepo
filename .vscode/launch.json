@@ -6,12 +6,30 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.Tests.dll",
+            "program": "${workspaceFolder}/tests/ParkingApplication.Tests/bin/Debug/net8.0/ParkingApplication.Tests.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ParkingApplication.Tests",
+            "cwd": "${workspaceFolder}/tests/ParkingApplication.Tests",
             "stopAtEntry": false,
             "console": "internalConsole",
-            "justMyCode": true
+            "justMyCode": false,  
+            "requireExactSource": false 
+        },
+
+        {
+            "name": ".NET Core Launch (ParkingApplication.Api)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/ParkingApplication.Api/bin/Debug/net8.0/ParkingApplication.Api.dll", 
+            "args": [],
+            "cwd": "${workspaceFolder}/ParkingApplication.Api",  
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "justMyCode": false,
+            "requireExactSource": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         }
     ]
 }

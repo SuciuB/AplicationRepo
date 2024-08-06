@@ -15,6 +15,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.4.3" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+    <PackageReference Include="Moq" Version="4.16.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ParkingApplication\ParkingApplication.csproj" />
-    <ProjectReference Include="..\ParkingApplication\ParkingApplication.csproj" />
+    <ProjectReference Include="..\..\ParkingApplication.Api\ParkingApplication.Api.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.VisualBasic;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Models;
+using ParkingApplication.Api.Repositories;
 
 namespace ParkingApplication.Services;
 
@@ -12,31 +13,52 @@ public class ParkingService : IParkingService
 
     public int MaxSlots { get; set; }
 
+    private readonly ICommandRepository<ParkingModel> _commandRepository;
+    private readonly IQueryRepository<ParkingModel> _queryRepository;
+    private readonly IRepositoryFactory _repositoryFactory;
     private readonly IAccountService _accountService;
 
-    public ParkingService(IAccountService accountService)
+    public ParkingService(IAccountService accountService, IRepositoryFactory repositoryFactory)
     {
+        _repositoryFactory = repositoryFactory;
+        _queryRepository = repositoryFactory.CreateQueryRepository<ParkingModel>();
+        _commandRepository = repositoryFactory.CreateCommandRepository<ParkingModel>();
         _accountService = accountService;
         MaxSlots = 50;
+
+    }
+    public List<ParkingModel> GetAllCars()
+    {
+        return _queryRepository.GetAll();
     }
 
-    public List<ParkingModel> GetParkedCar { get; } = new List<ParkingModel>  { new ParkingModel(1, "abc"), new ParkingModel(2, "abcde") };
-
-    public void AddToParking(int id, string carNumber)
+    public void AddParking(ParkingModel parkingModel)
     {
-        if(GetParkedCar.Count < MaxSlots && carNumber != null)
+        _commandRepository.Create(parkingModel);
+    }
+
+    public void RemoveParking(ParkingModel parkingModel)
+    {
+        _commandRepository.Delete(parkingModel);
+    }
+
+    public void AddToParking(int id, string carNumber, int userId)
+    {
+        var getCars = _queryRepository.GetAll();
+        if(getCars.Count < MaxSlots && carNumber != null)
         {
-            var Car = new ParkingModel(id, carNumber);
-            GetParkedCar.Add(Car);
+            var Car = new ParkingModel(id, carNumber, userId);
+            _commandRepository.Create(Car);
 
         }
     }
 
     public bool ExitParking(string carNumber)
     {
-        var parkedCar = GetParkedCar.Find(car => car.CarNumber == carNumber);
+        var getCars = _queryRepository.GetAll();
+        var parkedCar = _commandRepository.GetByCarNumber(carNumber);
 
-        if (parkedCar != null && _accountService.PayForParking(1, parkedCar.InTime))
+        if (parkedCar != null && _accountService.PayForParking(parkedCar.Id, parkedCar.InTime))
         {
             parkedCar.ExitTime = DateTime.Now;
             return true;

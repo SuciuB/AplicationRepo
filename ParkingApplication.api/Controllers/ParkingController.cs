@@ -7,51 +7,51 @@ using ParkingApplication.Api.Models;
 namespace ParkingApplication.Controllers;
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/parked-car")]
     
 public class ParkedCarsController : ControllerBase
 {
-    private readonly IParkingService _parkingService;
+private readonly IParkingService _parkingService;
 
-    public ParkedCarsController (IParkingService parkingService)
-    { 
-        _parkingService = parkingService;
-    }
+public ParkedCarsController (IParkingService parkingService)
+{ 
+    _parkingService = parkingService;
+}
 
-    [HttpGet]
-    public ActionResult<List<ParkingModel>> GetListOfParkedCars()
+[HttpGet]
+public ActionResult<List<ParkingModel>> GetListOfParkedCars()
+{
+    return Ok(_parkingService.GetAllCars());
+}
+
+[HttpPost("parking")]
+public IActionResult AddToParking([FromBody] ParkingModel car)
+{
+    try
     {
-        return Ok(_parkingService.GetParkedCar);
+        _parkingService.AddToParking(car.Id, car.CarNumber, car.UserId);
+        return Ok();
     }
-
-    [HttpPost("parking")]
-    public IActionResult AddToParking([FromBody] ParkingModel car)
+    catch (Exception ex)
     {
-        try
-        {
-            _parkingService.AddToParking(car.CarId, car.CarNumber);
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return BadRequest(ex.Message);
     }
+}
 
-    [HttpDelete("parked-car/{carNumber}")]
-    public IActionResult ExitParking(string carNumber)
+[HttpDelete("{carNumber}")]
+public IActionResult ExitParking(string carNumber)
+{
+    try
     {
-        try
-        {
-            bool exited = _parkingService.ExitParking(carNumber);
-            if (exited)
-                return Ok("Car exited from parking successfully.");
-            else
-                return NotFound("Car not found or payment not processed.");
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        bool exited = _parkingService.ExitParking(carNumber);
+        if (exited)
+            return Ok("Car exited from parking successfully.");
+        else
+            return NotFound("Car not found or payment not processed.");
     }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 }

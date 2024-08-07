@@ -1,41 +1,43 @@
 using System.Data.SqlClient;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Models;
-using Microsoft.Extensions.Options;
-using ParkingApplication.Api.Configuration;
 
 namespace Repositories
 {
-public class AccountRepository : IQueryRepository<AccountModel>
+    public class AccountRepository : IQueryRepository<AccountModel>
 {
-private readonly string _connectionString;
+private readonly SqlConnection _connection;
 
-public AccountRepository(IOptions<ConnectionStrings> connectionStrings)
+public AccountRepository(SqlConnection connection)
 {
-    _connectionString = connectionStrings.Value.DefaultConnection;
+    _connection = connection;
 }
 
 public List<AccountModel> GetAll()
 {
-var accounts = new List<AccountModel>();
+    var accounts = new List<AccountModel>();
 
-using (var connection = new SqlConnection(_connectionString))
-{
-    connection.Open();
-    var command = new SqlCommand("SELECT * FROM Account", connection);
-
-    using (var reader = command.ExecuteReader())
+    try
     {
-        while (reader.Read())
-        {
-            int accountId = (int)reader["AccountId"];
-            double amount = Convert.ToDouble(reader["Amount"]);
-            int userId = (int)reader["UserId"];
+        _connection.Open();
+        var command = new SqlCommand("SELECT * FROM Account", _connection);
 
-            accounts.Add(new AccountModel(accountId, amount, userId));
+        using (var reader = command.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                int accountId = (int)reader["AccountId"];
+                double amount = Convert.ToDouble(reader["Amount"]);
+                int userId = (int)reader["UserId"];
+
+                accounts.Add(new AccountModel(accountId, amount, userId));
+            }
         }
     }
-}
+    finally
+    {
+        _connection.Close();
+    }
 
     return accounts;
 }

@@ -15,9 +15,9 @@ public class ParkingModel
 
     public ParkingModel(int id, string carNumber, int userId)
     {
-        UserId = userId;
         Id = id;
         CarNumber = carNumber;
+        UserId = userId;
         InTime = DateTime.Now;
         ExitTime = null;
     }

@@ -25,15 +25,15 @@ public class ParkingControllerIntegrationTests
         // Assert
         response.EnsureSuccessStatusCode();
         var responseString = await response.Content.ReadAsStringAsync();
-        Assert.Contains("abc", responseString);
-        Assert.Contains("abcd", responseString);
+        Assert.Contains("ABC", responseString);
+        Assert.Contains("XYZ", responseString);
     }
 
     [Fact]
     public async Task AddToParking_WhenParkingAvailable_ReturnsOk()
     {
         // Arrange
-        var car = new ParkingModel(3, "abcf", 3);
+        var car = new ParkingModel(3, "AWE", 3);
         HttpClient client = new()
         {
             BaseAddress = new Uri("http://localhost:5149")
@@ -52,7 +52,7 @@ public class ParkingControllerIntegrationTests
     public async Task ExitParking_WhenCarExists_ReturnsOk()
     {
         // Arrange
-        var carNumber = "abc";
+        var carNumber = "ABC";
         HttpClient client = new()
         {
             BaseAddress = new Uri("http://localhost:5149")

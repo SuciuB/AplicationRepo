@@ -7,6 +7,6 @@ using ParkingApplication.Api.Models;
 namespace ParkingApplication.Api.Interfaces;
 public interface IAccountService
 {
-    public List<AccountModel> GetAllCars();
+    public List<AccountModel> GetAllAccounts();
     public bool PayForParking(int userId, DateTime inTime);
 }

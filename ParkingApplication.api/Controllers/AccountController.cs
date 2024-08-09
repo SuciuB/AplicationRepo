@@ -21,7 +21,7 @@ public class AccountsController : ControllerBase
     [HttpGet]
     public ActionResult<List<AccountModel>> GetAccounts()
     {
-        return Ok(_accountService.GetAllCars());
+        return Ok(_accountService.GetAllAccounts());
     }
 
     [HttpPost("Payments")]

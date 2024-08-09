@@ -5,10 +5,29 @@ using Microsoft.OpenApi.Models;
 using ParkingApplication.Services;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Factories;
+using ParkingApplication.Api.Repositories;
+using ParkingApplication.Api.Configuration;
+using System.Data.SqlClient;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder();
 
-builder.Services.AddSingleton<IRepositoryFactory, RepositoryFactory>();
+// builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings"));
+
+// builder.Services.AddScoped<SqlConnection>(sp =>
+// {
+//     var connectionString = sp.GetRequiredService<IOptions<ParkingApplication.Api.Configuration.ConnectionStrings>>().Value.DefaultConnection;
+//     return new SqlConnection(connectionString);
+//});
+
+builder.Services.AddScoped<IDbContext>(provider =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    return new DbContext(connectionString);
+});
+
+
+builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IParkingService, ParkingService>();
 builder.Services.AddControllers();

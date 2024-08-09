@@ -1,26 +1,26 @@
-using ParkingApplication.Api.Configuration;
-using System.Data.SqlClient;
 using ParkingApplication.Api.Interfaces;
 using ParkingApplication.Api.Models;
+using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace ParkingApplication.Api.Repositories;
-    public class ParkingRepository : IQueryRepository<ParkingModel>, ICommandRepository<ParkingModel>
+public class ParkingRepository : IQueryRepository<ParkingModel>, ICommandRepository<ParkingModel>
 {
-    private readonly SqlConnection _connection;
+    private readonly IDbContext _dbContext;
 
-    public ParkingRepository(SqlConnection connection)
+    public ParkingRepository(IDbContext dbContext)
     {
-        _connection = connection;
+        _dbContext = dbContext;
     }
 
     public List<ParkingModel> GetAll()
     {
         var cars = new List<ParkingModel>();
 
-        try
+        using (var connection = _dbContext.GetConnection())
         {
-            _connection.Open();
-            var command = new SqlCommand("SELECT * FROM ParkedCar", _connection);
+            connection.Open();
+            var command = new SqlCommand("SELECT * FROM ParkedCar", connection);
 
             using (var reader = command.ExecuteReader())
             {
@@ -34,49 +34,37 @@ namespace ParkingApplication.Api.Repositories;
                 }
             }
         }
-        finally
-        {
-            _connection.Close(); 
-        }
 
         return cars;
     }
 
     public ParkingModel GetByCarNumber(string carNumber)
     {
-        var carId = GetAll();
-        return carId.Find(car => car.CarNumber == carNumber);
+        var cars = GetAll();
+        return cars.Find(car => car.CarNumber == carNumber);
     }
 
     public void Create(ParkingModel parkingModel)
     {
-        try
+        using (var connection = _dbContext.GetConnection())
         {
-            _connection.Open();
-            var command = new SqlCommand("INSERT INTO ParkedCar (Id, CarNumber, UserId) VALUES (@Id, @CarNumber, @UserId)", _connection);
+            connection.Open();
+            var command = new SqlCommand("INSERT INTO ParkedCar (Id, CarNumber, UserId) VALUES (@Id, @CarNumber, @UserId)", connection);
             command.Parameters.AddWithValue("@Id", parkingModel.Id);
             command.Parameters.AddWithValue("@CarNumber", parkingModel.CarNumber);
             command.Parameters.AddWithValue("@UserId", parkingModel.UserId);
             command.ExecuteNonQuery();
         }
-        finally
-        {
-            _connection.Close();
-        }
     }
 
     public void Delete(ParkingModel parkingModel)
     {
-        try
+        using (var connection = _dbContext.GetConnection())
         {
-            _connection.Open();
-            var command = new SqlCommand("DELETE FROM ParkedCar WHERE Id = @Id", _connection);
+            connection.Open();
+            var command = new SqlCommand("DELETE FROM ParkedCar WHERE Id = @Id", connection);
             command.Parameters.AddWithValue("@Id", parkingModel.Id);
             command.ExecuteNonQuery();
-        }
-        finally
-        {
-            _connection.Close();
         }
     }
 }

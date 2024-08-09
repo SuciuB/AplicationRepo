@@ -12,13 +12,20 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder();
 
-builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings"));
+// builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings"));
 
-builder.Services.AddScoped<SqlConnection>(sp =>
+// builder.Services.AddScoped<SqlConnection>(sp =>
+// {
+//     var connectionString = sp.GetRequiredService<IOptions<ParkingApplication.Api.Configuration.ConnectionStrings>>().Value.DefaultConnection;
+//     return new SqlConnection(connectionString);
+//});
+
+builder.Services.AddScoped<IDbContext>(provider =>
 {
-    var connectionString = sp.GetRequiredService<IOptions<ParkingApplication.Api.Configuration.ConnectionStrings>>().Value.DefaultConnection;
-    return new SqlConnection(connectionString);
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    return new DbContext(connectionString);
 });
+
 
 builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddScoped<IAccountService, AccountService>();

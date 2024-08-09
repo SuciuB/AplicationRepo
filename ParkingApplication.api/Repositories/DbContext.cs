@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using ParkingApplication.Api.Models;
-using ParkingApplication.Services;
+using ParkingApplication.Api.Interfaces;
 
-public class DbContext
+public class DbContext : IDbContext
 {
     private readonly string _connectionString;
 
@@ -13,7 +9,7 @@ public class DbContext
     {
         _connectionString = connectionString;
     }
-
+    
     public SqlConnection GetConnection()
     {
         return new SqlConnection(_connectionString);
